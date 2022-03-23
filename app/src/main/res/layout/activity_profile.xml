@@ -25,10 +25,22 @@
             android:text="Name" />
 
         <TextView
+            android:id="@+id/user_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Handle" />
+
+        <TextView
             android:id="@+id/user_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Some Description" />
+
+        <TextView
+            android:id="@+id/user_created"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Joined Date" />
 
         <TextView
             android:id="@+id/user_something"
