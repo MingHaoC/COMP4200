@@ -33,6 +33,9 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        //TODO: Get intent data or shared preferences
+        //TODO: Hide edit button for other peoples profiles
+
         name = findViewById(R.id.user_name);
         description = findViewById(R.id.user_description);
         imageView = findViewById(R.id.user_image);
@@ -47,6 +50,6 @@ public class ProfileActivity extends AppCompatActivity {
         date_created.setText(user.created.getMonth() + " " + user.created.getYear());
 //        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
 
-        //TODO: Get fragments of tweets and other data filtered by user
+        //TODO: Get fragments of tweets and other user aspects filtered by user
     }
 }
