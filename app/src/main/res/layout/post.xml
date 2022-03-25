@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="200dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/task"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E1E24">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:src="@android:drawable/ic_menu_camera"
+                app:civ_border_color="#726DA8"
+                app:civ_border_width="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPostUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/placeholder_username"
+                android:textColor="#FFF8F0"
+                app:layout_constraintStart_toEndOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPostDesc"
+                android:layout_width="285dp"
+                android:layout_height="39dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/placeholder_description"
+                android:textColor="#FFF8F0"
+                app:layout_constraintBottom_toTopOf="@+id/ivPostPicture"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivPostPicture"
+                android:layout_width="320dp"
+                android:layout_height="180dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="99dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#726DA8"
+                android:contentDescription="@string/todo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="?android:attr/alertDialogIcon"
+                tools:ignore="ImageContrastCheck" />
+
+            <ImageButton
+                android:id="@+id/ibComment"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginBottom="15dp"
+                android:background="#1E1E24"
+                android:contentDescription="@string/todo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/ivPostPicture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/comment"
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+
+            <ImageButton
+                android:id="@+id/ibComment2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="11dp"
+                android:background="#1E1E24"
+                app:layout_constraintEnd_toStartOf="@+id/ivPostPicture"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_image"
+                app:srcCompat="@drawable/like"
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/todo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
