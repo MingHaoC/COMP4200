@@ -3,6 +3,8 @@ package com.example.comp4200;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,11 +24,13 @@ public class ProfileActivity extends AppCompatActivity {
         String description = "This is a test profile";
         LocalDateTime created = LocalDateTime.now();
     }
+
     TextView name;
     TextView description;
     ImageView imageView;
     TextView handle;
     TextView date_created;
+    Button editButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +38,13 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         //TODO: Get intent data or shared preferences
-        //TODO: Hide edit button for other peoples profiles
 
         name = findViewById(R.id.user_name);
         description = findViewById(R.id.user_description);
         imageView = findViewById(R.id.user_image);
         handle = findViewById(R.id.user_handle);
         date_created = findViewById(R.id.user_created);
+        editButton = findViewById(R.id.edit_profile);
 
         //TODO: Populate Text with real user data
         User user = new User();
@@ -49,7 +53,10 @@ public class ProfileActivity extends AppCompatActivity {
         handle.setText(user.handle);
         date_created.setText(user.created.getMonth() + " " + user.created.getYear());
 //        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
-
+        //TODO: Hide edit button on other peoples profiles
+        if (user.user_id == user.user_id){ //need current user
+            editButton.setVisibility(View.VISIBLE);
+        }
         //TODO: Get fragments of tweets and other user aspects filtered by user
     }
 }
