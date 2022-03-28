@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">COMP4200</string>
+    <string name="what_s_happening">What\'s happening?</string>
+    <string name="submit">Submit</string>
+    <string name="error_text_placeholder">ERROR TEXT PLACEHOLDER</string>
+    <string name="please_sign_in">Please sign in.</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="username_or_email_address">Username or email address</string>
 </resources>

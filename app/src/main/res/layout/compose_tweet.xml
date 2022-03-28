@@ -8,7 +8,7 @@
     android:onClick="sendTweet">
 
     <EditText
-        android:id="@+id/composeTweet"
+        android:id="@+id/compose_etextComposition"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -37,7 +37,7 @@
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/send_tweet"
+        android:id="@+id/compose_buttonSubmit"
         android:layout_width="106dp"
         android:layout_height="58dp"
         android:layout_marginStart="285dp"
@@ -49,10 +49,10 @@
         app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/composeTweet" />
+        app:layout_constraintTop_toBottomOf="@+id/compose_etextComposition" />
 
     <TextView
-        android:id="@+id/tweet_errorMessage"
+        android:id="@+id/compose_textError"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -61,11 +61,11 @@
         android:text="@string/error_text_placeholder"
         android:textAlignment="gravity"
         android:textAllCaps="false"
-        android:textColor="#709775"
+        android:textColor="#F44336"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/send_tweet"
+        app:layout_constraintEnd_toStartOf="@+id/compose_buttonSubmit"
         app:layout_constraintHeight_min="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/composeTweet"
+        app:layout_constraintTop_toBottomOf="@+id/compose_etextComposition"
         app:layout_constraintWidth_min="250dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

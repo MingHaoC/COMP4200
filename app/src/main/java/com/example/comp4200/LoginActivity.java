@@ -23,13 +23,13 @@ public class LoginActivity extends AppCompatActivity {
          *
          * @param view
          */
-        Button loginButton = findViewById(R.id.login_button);
+        Button loginButton = findViewById(R.id.login_buttonLogin);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText username_email_text = findViewById(R.id.login_username_email);
-                EditText password_text =  findViewById(R.id.login_password);
-                TextView error_text = findViewById(R.id.login_errorMessage);
+                EditText username_email_text = findViewById(R.id.login_etextUsername);
+                EditText password_text =  findViewById(R.id.login_etextPassword);
+                TextView error_text = findViewById(R.id.login_textError);
 
                 String username_email = username_email_text.getText().toString();
                 String password = password_text.getText().toString();
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        TextView registerText = findViewById(R.id.register_text);
+        TextView registerText = findViewById(R.id.login_textDonthave);
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
