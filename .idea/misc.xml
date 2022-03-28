@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/user/Desktop/COMP 4200/COMP4200/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/user/Desktop/COMP 4200/COMP4200/app/src/main/res/layout/compose_tweet.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/user/Desktop/COMP 4200/COMP4200/app/src/main/res/layout/login_activity.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Ivan/AndroidStudioProjects/COMP4200/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2985" />
+        <entry key="..\:/Users/Ivan/AndroidStudioProjects/COMP4200/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/Ivan/AndroidStudioProjects/COMP4200/app/src/main/res/layout/compose_tweet.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Ivan/AndroidStudioProjects/COMP4200/app/src/main/res/layout/login_activity.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Ivan/AndroidStudioProjects/COMP4200/app/src/main/res/layout/post.xml" value="0.67" />
       </map>
     </option>
   </component>
