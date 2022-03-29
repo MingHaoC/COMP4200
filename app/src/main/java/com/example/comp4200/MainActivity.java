@@ -23,21 +23,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         authenticationService = new AuthenticationServiceImpl();
 
-        Button toLoginButton = findViewById(R.id.login_button_main);
-
-        toLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), LoginActivity.class));
-            }
-        });
-
         Button toComposeTweet = findViewById(R.id.tweet_button_main);
 
         toComposeTweet.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ComposeTweetActivity.class)));
 
         firebaseAuth = FirebaseAuth.getInstance();
-//        authenticationService.register(this,"Test", "test", "chen1fl@uwindsor.ca", "password123!", "I am a new twitter user");
+        // authenticationService.register(this,"Test", "test", "chen1fl@uwindsor.ca", "password123!", "I am a new twitter user");
 
         // authenticationService.login(this, "chen1fl@uwindsor.ca", "password123!");
 
@@ -53,5 +44,4 @@ public class MainActivity extends AppCompatActivity {
         else
             System.out.println("Logged in");
     }
-
 }
