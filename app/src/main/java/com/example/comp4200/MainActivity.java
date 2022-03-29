@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(), ComposeTweetActivity.class));
             }
         });
-    }
 
         firebaseAuth = FirebaseAuth.getInstance();
         // authenticationService.register(this,"Test", "test", "chen1fl@uwindsor.ca", "password123!", "I am a new twitter user");
