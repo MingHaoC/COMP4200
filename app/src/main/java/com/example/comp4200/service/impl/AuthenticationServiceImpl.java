@@ -1,5 +1,7 @@
 package com.example.comp4200.service.impl;
 
+import android.content.Context;
+import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,33 +22,42 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     FirebaseAuth firebaseAuth;
     UserDao userDao = new UserDao();
 
-    // todo: Encrypt password using Bcrypt (not sure if we need to go that far since it's just gonna be a basic project)
-    @Override
-    public void register(String displayName, String handle, String email, String password, String description) {
-
+    public AuthenticationServiceImpl() {
         firebaseAuth = FirebaseAuth.getInstance();
+    }
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    // todo: check with other if we need more information to be stored in the realtime db
-                        User user = new User();
-                        user.setDisplayName(displayName);
-                        user.setHandle(handle);
-                        user.setDescription(description);
-                        userDao.add(user, task.getResult().getUser().getUid());
-                } else {
-                    // todo: output toast message stating that the user was not created successfully
-                    System.out.println("User not created Successfully : " + task.getException().getMessage());
-                }
-            }
+    @Override
+    public void register(Context context, String displayName, String handle, String email, String password, String description) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // todo: check with other if we need more information to be stored in the realtime db
+                User user = new User();
+                user.setDisplayName(displayName);
+                user.setHandle(handle);
+                user.setDescription(description);
+                userDao.add(user, task.getResult().getUser().getUid());
+                Toast.makeText(context, "User was created successfully!", Toast.LENGTH_LONG).show();
+                // context.startActivity(new Intent(context, Login.class));
+            } else
+                Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
         });
     }
 
     @Override
-    public void login(String email, String password) {
+    public void login(Context context, String email, String password) {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful())
+                System.out.println("Login successfulyl");
+                // context.startActivity(new Intent(context, MainActivity.class));
+            else
+                Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+        });
+    }
 
+    @Override
+    public void logout(Context context) {
+        firebaseAuth.signOut();
+        // context.startActivity(new Intent(context, Login.class));
     }
 
 }

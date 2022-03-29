@@ -7,6 +7,7 @@ import android.os.Bundle;
 import com.example.comp4200.service.AuthenticationService;
 import com.example.comp4200.service.impl.AuthenticationServiceImpl;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,18 +20,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        // authenticationService.register("Test", "test", "chen1fl@uwindsor.ca", "password123!", "I am a new twitter user");
+        // authenticationService.register(this,"Test", "test", "chen1fl@uwindsor.ca", "password123!", "I am a new twitter user");
 
+        // authenticationService.login(this, "chen1fl@uwindsor.ca", "password123!");
 
+        // authenticationService.logout(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-//        FirebaseUser user = firebaseAuth.getCurrentUser();
-//        if (user == null)
-//            // todo: update this so it goes to the login activity instead of staying on the main screen
-//            System.out.println("Not login");
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user == null)
+            // todo: update this so it goes to the login activity instead of staying on the main screen
+            System.out.println("Not login");
+        else
+            System.out.println("Logged in");
     }
 
 }
