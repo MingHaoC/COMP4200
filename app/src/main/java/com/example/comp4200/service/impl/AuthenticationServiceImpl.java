@@ -16,6 +16,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 public class AuthenticationServiceImpl implements AuthenticationService {
 
 
@@ -35,7 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 user.setDisplayName(displayName);
                 user.setHandle(handle);
                 user.setDescription(description);
-                userDao.add(user, task.getResult().getUser().getUid());
+                userDao.add(user, Objects.requireNonNull(task.getResult().getUser()).getUid());
                 Toast.makeText(context, "User was created successfully!", Toast.LENGTH_LONG).show();
                 // context.startActivity(new Intent(context, Login.class));
             } else
@@ -47,8 +49,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public void login(Context context, String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful())
-                System.out.println("Login successfulyl");
-                // context.startActivity(new Intent(context, MainActivity.class));
+                context.startActivity(new Intent(context, MainActivity.class));
             else
                 Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
         });
