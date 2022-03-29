@@ -4,14 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.example.comp4200.DAO.UserDao;
-import com.example.comp4200.model.User;
 import com.example.comp4200.service.AuthenticationService;
 import com.example.comp4200.service.impl.AuthenticationServiceImpl;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,14 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-
-
-//        HashMap<String, Object> hashMap = new HashMap<>();
-//        hashMap.put("displayName", "test edited");
-//        userDao.update("-MzHR2ce473GUYMKEdsj", hashMap);
-
-        authenticationService.register("Test", "test", "shinypichu11@hotmail.com", "password123!");
+        // authenticationService.register("Test", "test", "chen1fl@uwindsor.ca", "password123!", "I am a new twitter user");
 
 
     }

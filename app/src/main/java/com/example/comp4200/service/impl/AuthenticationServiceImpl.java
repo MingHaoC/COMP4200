@@ -22,7 +22,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     // todo: Encrypt password using Bcrypt (not sure if we need to go that far since it's just gonna be a basic project)
     @Override
-    public void register(String displayName, String handle, String email, String password) {
+    public void register(String displayName, String handle, String email, String password, String description) {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -34,7 +34,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         User user = new User();
                         user.setDisplayName(displayName);
                         user.setHandle(handle);
-                        user.setPassword(password);
+                        user.setDescription(description);
                         userDao.add(user, task.getResult().getUser().getUid());
                 } else {
                     // todo: output toast message stating that the user was not created successfully
