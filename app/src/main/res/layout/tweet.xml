@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:minHeight="200dp">
 
     <androidx.cardview.widget.CardView
@@ -21,38 +21,26 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="315dp"
             android:background="#1E1E24">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:src="@android:drawable/ic_menu_camera"
-                app:civ_border_color="#726DA8"
-                app:civ_border_width="2dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvPostUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/placeholder_username"
                 android:textColor="#FFF8F0"
-                app:layout_constraintStart_toEndOf="@+id/profile_image"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvPostDesc"
-                android:layout_width="285dp"
-                android:layout_height="39dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="5dp"
+                android:layout_width="291dp"
+                android:layout_height="51dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="12dp"
                 android:text="@string/placeholder_description"
                 android:textColor="#FFF8F0"
                 app:layout_constraintBottom_toTopOf="@+id/ivPostPicture"
@@ -81,12 +69,14 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="11dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="92dp"
                 android:background="#1E1E24"
                 android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivPostPicture"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ibComment2"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/comment"
                 tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
 
@@ -95,15 +85,29 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="11dp"
                 android:background="#1E1E24"
+                android:contentDescription="@string/todo"
                 app:layout_constraintEnd_toStartOf="@+id/ivPostPicture"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_image"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2"
                 app:srcCompat="@drawable/like"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="@string/todo" />
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="57dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="TODO"
+                android:outlineAmbientShadowColor="#FFFFFF"
+                android:outlineSpotShadowColor="#FFFFFF"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_account_circle_24"
+                tools:ignore="ImageContrastCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
