@@ -19,6 +19,7 @@
         android:fontFamily="sans-serif"
         android:gravity="top"
         android:hint="@string/what_s_happening"
+        android:importantForAutofill="no"
         android:inputType="textMultiLine"
         android:paddingStart="10dp"
         android:paddingLeft="10dp"
@@ -28,13 +29,12 @@
         android:scrollbars="vertical"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#FFF8F0"
-        android:textColorHint="#FFF8F0"
+        android:textColorHint="#709775"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_min="300dp"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/compose_buttonSubmit"
@@ -63,9 +63,11 @@
         android:textAllCaps="false"
         android:textColor="#F44336"
         android:textSize="16sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toStartOf="@+id/compose_buttonSubmit"
         app:layout_constraintHeight_min="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/compose_etextComposition"
-        app:layout_constraintWidth_min="250dp" />
+        app:layout_constraintWidth_min="250dp"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

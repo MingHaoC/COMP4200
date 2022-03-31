@@ -9,4 +9,11 @@
     <string name="register">Register</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
     <string name="username_or_email_address">Username or email address</string>
+    <string name="re_enter_your_password">Re-enter your password.</string>
+    <string name="login">Login</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="let_s_get_you_set_up">Let\'s get you set up.</string>
+    <string name="create_a_strong_password">Create a strong password.</string>
+    <string name="enter_your_email_address">Enter your email address.</string>
+    <string name="create_your_username">Create your username.</string>
 </resources>

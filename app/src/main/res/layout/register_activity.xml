@@ -7,14 +7,52 @@
     android:background="#1E1E24">
 
     <EditText
+        android:id="@+id/register_etextConfirmPassword"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="@string/re_enter_your_password"
+        android:importantForAutofill="no"
+        android:inputType="textVisiblePassword"
+        android:textAlignment="center"
+        android:textColor="#FFF8F0"
+        android:textColorHint="#709775"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_etextPassword" />
+
+    <EditText
         android:id="@+id/register_etextUsername"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="@string/create_your_username"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textColor="#FFF8F0"
+        android:textColorHint="#709775"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_etextEmail" />
+
+    <EditText
+        android:id="@+id/register_etextEmail"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="@string/username_or_email_address"
+        android:hint="@string/enter_your_email_address"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
@@ -33,7 +71,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="@string/create_a_strong_password"
+        android:importantForAutofill="no"
         android:inputType="textVisiblePassword"
         android:textAlignment="center"
         android:textColor="#FFF8F0"
@@ -41,45 +80,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_etextUsername"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/register_etextUsername" />
 
     <Button
         android:id="@+id/register_buttonLogin"
-        android:layout_width="102dp"
+        android:layout_width="wrap_content"
         android:layout_height="58dp"
         android:layout_marginTop="40dp"
         android:backgroundTint="#9E0031"
-        android:text="@string/sign_in"
+        android:text="@string/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_etextPassword" />
-
-    <TextView
-        android:id="@+id/register_textDonthave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/dont_have_an_account"
-        android:textColor="#9575CD"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.377"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_buttonLogin" />
-
-    <TextView
-        android:id="@+id/register_textLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/register"
-        android:textColor="#709775"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/register_textDonthave"
-        app:layout_constraintTop_toBottomOf="@+id/register_buttonLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/register_etextConfirmPassword" />
 
     <TextView
         android:id="@+id/register_textError"
@@ -97,13 +110,38 @@
         tools:visibility="visible" />
 
     <TextView
+        android:id="@+id/register_textDonthave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/already_have_an_account"
+        android:textColor="#9575CD"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_buttonLogin" />
+
+    <TextView
+        android:id="@+id/register_textLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/login"
+        android:textColor="#709775"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/register_textDonthave"
+        app:layout_constraintTop_toBottomOf="@+id/register_buttonLogin" />
+
+    <TextView
         android:id="@+id/register_textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="109dp"
-        android:text="@string/please_sign_in"
+        android:text="@string/let_s_get_you_set_up"
         android:textColor="#FFF8F0"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
