@@ -1,6 +1,8 @@
 package com.example.comp4200;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,29 +10,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.comp4200.fragment.Tweet;
+import com.example.comp4200.model.User;
+
 import java.time.LocalDateTime;
 
 
 public class ProfileActivity extends AppCompatActivity {
-    //TODO: User model to import data from
-    private class User {
-        Integer user_id = 1337;
-        String username = "Test";
-        String handle = "test";
-        String first_name = "Tester";
-        String last_name = "Example";
-        String email = "test@example.com";
-        String image_id = "someimage.png";
-        String description = "This is a test profile";
-        LocalDateTime created = LocalDateTime.now();
-    }
-
     TextView name;
     TextView description;
     ImageView imageView;
     TextView handle;
     TextView date_created;
     Button editButton;
+
+    private String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +42,23 @@ public class ProfileActivity extends AppCompatActivity {
 
         //TODO: Populate Text with real user data
         User user = new User();
-        name.setText(user.first_name + " " + user.last_name);
-        description.setText(user.description);
-        handle.setText(user.handle);
-        date_created.setText(user.created.getMonth() + " " + user.created.getYear());
+        this.userId = user.getId();
+        name.setText(user.getDisplayName());
+        description.setText(user.getDescription());
+        handle.setText(user.getHandle());
+        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
 //        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
         //TODO: Hide edit button on other peoples profiles
-        if (user.user_id == user.user_id){ //need current user
+        if (this.userId == user.getId()){ //need current user
             editButton.setVisibility(View.VISIBLE);
         }
-        //TODO: Get fragments of tweets and other user aspects filtered by user
+    }
+
+    public void getTweets(View view) {
+        Tweet tweetFragment = Tweet.newInstance(userId);
+        FragmentManager fm=getSupportFragmentManager();
+        FragmentTransaction ft=fm.beginTransaction();
+        ft.replace(R.id.user_forums,tweetFragment);
+        ft.commit();
     }
 }
