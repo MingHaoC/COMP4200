@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity">
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ViewSwitcher
+        android:id="@+id/name_switcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:onClick="editTextView"
+            android:text="Name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:ems="10"
+                android:hint="Input display name"
+                android:inputType="textPersonName" />
+
+            <ImageButton
+                android:id="@+id/edit_name_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="submitEditUser" />
+        </LinearLayout>
+    </ViewSwitcher>
+
+    <ViewSwitcher
+        android:id="@+id/handle_switcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/user_handle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:onClick="editTextView"
+            android:text="Handle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edit_handle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Input handle"
+                android:inputType="textPersonName" />
+
+            <ImageButton
+                android:id="@+id/edit_handle_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="submitEditUser" />
+        </LinearLayout>
+    </ViewSwitcher>
+
+    <ViewSwitcher
+        android:id="@+id/description_switcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/user_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:onClick="editTextView"
+            android:text="Description" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Input description"
+                android:inputType="textPersonName" />
+
+            <ImageButton
+                android:id="@+id/edit_description_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="submitEditUser" />
+        </LinearLayout>
+    </ViewSwitcher>
+
+    <Button
+        android:id="@+id/logout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+</LinearLayout>
