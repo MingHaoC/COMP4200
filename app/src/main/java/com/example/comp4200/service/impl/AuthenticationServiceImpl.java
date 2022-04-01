@@ -7,7 +7,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.comp4200.DAO.UserDao;
-import com.example.comp4200.LoginActivity;
 import com.example.comp4200.MainActivity;
 import com.example.comp4200.model.User;
 import com.example.comp4200.service.AuthenticationService;
@@ -16,8 +15,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.Objects;
 
 public class AuthenticationServiceImpl implements AuthenticationService {
 
@@ -30,16 +27,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public void register(Context context, String email, String password, String displayName, String handle) {
+    public void register(Context context, String displayName, String handle, String email, String password, String description) {
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 // todo: check with other if we need more information to be stored in the realtime db
                 User user = new User();
                 user.setDisplayName(displayName);
                 user.setHandle(handle);
-                userDao.add(user, Objects.requireNonNull(task.getResult().getUser()).getUid());
+                user.setDescription(description);
+                userDao.add(user, task.getResult().getUser().getUid());
                 Toast.makeText(context, "User was created successfully!", Toast.LENGTH_LONG).show();
-                context.startActivity(new Intent(context, MainActivity.class));
+                // context.startActivity(new Intent(context, Login.class));
             } else
                 Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
         });
@@ -49,7 +47,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public void login(Context context, String email, String password) {
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful())
-                context.startActivity(new Intent(context, MainActivity.class));
+                System.out.println("Login successfulyl");
+                // context.startActivity(new Intent(context, MainActivity.class));
             else
                 Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_LONG).show();
         });
@@ -57,9 +56,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public void logout(Context context) {
-        System.out.println("sign out");
         firebaseAuth.signOut();
-        context.startActivity(new Intent(context, LoginActivity.class));
+        // context.startActivity(new Intent(context, Login.class));
     }
 
 }
