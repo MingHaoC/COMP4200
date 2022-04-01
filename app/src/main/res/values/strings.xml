@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">COMP4200</string>
+    <string name="placeholder_username">Placeholder Username</string>
+    <string name="looking_for_something">Looking for something?</string>
+    <string name="todo">TODO</string>
+    <string name="placeholder_description">This is some placeholder text for the description of a post that the user gives when posting.</string>
     <string name="what_s_happening">What\'s happening?</string>
     <string name="submit">Submit</string>
     <string name="error_text_placeholder">ERROR TEXT PLACEHOLDER</string>
