@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.comp4200.service.AuthenticationService;
@@ -14,7 +13,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    AuthenticationService authenticationService = new AuthenticationServiceImpl();
+    AuthenticationService authenticationService;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -22,17 +21,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        authenticationService = new AuthenticationServiceImpl();
+
+        Button toComposeTweet = findViewById(R.id.tweet_button_main);
+        Button logout = findViewById(R.id.mainActivity_logout);
+
+        toComposeTweet.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ComposeTweetActivity.class)));
+        logout.setOnClickListener(view -> authenticationService.logout(this));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user == null)
-            // todo: update this so it goes to the login activity instead of staying on the main screen
-            System.out.println("Not login");
-        else
-            System.out.println("Logged in");
+            startActivity(new Intent(this, LoginActivity.class));
     }
-
 }

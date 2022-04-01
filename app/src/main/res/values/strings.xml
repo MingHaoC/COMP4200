@@ -12,5 +12,8 @@
     <string name="sign_in">Sign In</string>
     <string name="register">Register</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
-    <string name="username_or_email_address">Username or email address</string>
+    <string name="email_address">Email address</string>
+    <string name="display_name">Display name</string>
+    <string name="handle">Handle</string>
+    <string name="already_have_account">Already have an account? Login Here</string>
 </resources>
