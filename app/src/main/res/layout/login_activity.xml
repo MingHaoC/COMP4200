@@ -81,19 +81,6 @@
         app:layout_constraintTop_toBottomOf="@+id/login_buttonLogin" />
 
     <TextView
-        android:id="@+id/login_textError"
-        android:layout_width="287dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="40dp"
-        android:gravity="center"
-        android:hint="@string/error_text_placeholder"
-        android:textColor="#9E0031"
-        android:textColorHint="#F44336"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_textDonthave" />
-
-    <TextView
         android:id="@+id/login_textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -47,7 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
         name.setText(user.getDisplayName());
         description.setText(user.getDescription());
         handle.setText(user.getHandle());
-//        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
+
+        // date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
 //        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
         //TODO: Hide edit button on other peoples profiles
         if (this.userId == user.getId()){ //need current user

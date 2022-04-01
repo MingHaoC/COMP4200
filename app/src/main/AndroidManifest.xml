@@ -10,9 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.COMP4200">
-
+      
         <activity
-            android:name=".MainActivity"
+            android:name=".TimelineActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+      
         <activity
             android:name=".ComposeTweetActivity"
             android:parentActivityName=".MainActivity"
@@ -47,6 +47,11 @@
             android:name=".SettingsActivity"
             android:exported="false"
             android:parentActivityName=".ProfileActivity">
+
+        <activity
+            android:name=".RegisterActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
