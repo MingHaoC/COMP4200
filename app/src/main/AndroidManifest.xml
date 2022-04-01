@@ -3,7 +3,6 @@
     package="com.example.comp4200">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,8 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.COMP4200">
+
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".TimelineActivity"
@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ComposeTweetActivity"
             android:parentActivityName=".MainActivity"
@@ -31,6 +32,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".MainActivity"
@@ -39,6 +41,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
     </application>
 
 </manifest>

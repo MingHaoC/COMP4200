@@ -4,7 +4,7 @@ import android.content.Context;
 
 public interface AuthenticationService {
 
-    void register(Context context, String email, String password, String displayName, String handle);
+    void register(Context context, String displayName, String handle, String email, String password, String description);
 
     void login(Context context, String email, String password);
 

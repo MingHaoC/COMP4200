@@ -6,23 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.comp4200.service.AuthenticationService;
-import com.example.comp4200.service.impl.AuthenticationServiceImpl;
-
 public class LoginActivity extends AppCompatActivity {
-
-    AuthenticationService authenticationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
-        authenticationService = new AuthenticationServiceImpl();
 
         /*
          * grabs the username/email and password from the edit texts and checks to see if the user
@@ -32,23 +24,44 @@ public class LoginActivity extends AppCompatActivity {
          * @param view
          */
         Button loginButton = findViewById(R.id.login_buttonLogin);
-        loginButton.setOnClickListener(view -> {
-            EditText username_email_text = findViewById(R.id.login_etextUsername);
-            EditText password_text = findViewById(R.id.login_etextPassword);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText username_email_text = findViewById(R.id.login_etextUsername);
+                EditText password_text =  findViewById(R.id.login_etextPassword);
+                TextView error_text = findViewById(R.id.login_textError);
 
-            String email = username_email_text.getText().toString();
-            String password = password_text.getText().toString();
+                String username_email = username_email_text.getText().toString();
+                String password = password_text.getText().toString();
 
-            if (email.isEmpty() || password.isEmpty())
-                Toast.makeText(this, "email and password cannot be blank", Toast.LENGTH_LONG).show();
+                String error;
 
-            authenticationService.login(this, email, password);
+                System.out.println("error_message: " + error_text);
+
+                if (username_email.isEmpty() || password.isEmpty()) {
+                    error = "Please enter your email/username and password to login.";
+                } else {
+                    error = "";
+                    startActivity(new Intent(view.getContext(), MainActivity.class));
+                }
+
+               error_text.setText(error);
+
+//              still need to check if the user is in the database.
+//              assign error message appropriately
+            }
         });
 
+
+
         TextView registerText = findViewById(R.id.login_textDonthave);
-        registerText.setOnClickListener(view ->
-                startActivity(new Intent(view.getContext(), RegisterActivity.class))
-        );
+        registerText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //send to register page
+                //startActivity(new Intent(view.getContext(), RegisterActivity.class));
+            }
+        });
 
     }
 
