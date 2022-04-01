@@ -1,4 +1,4 @@
-package com.example.comp4200;
+package com.example.comp4200.model;
 
 public class Tweet {
 

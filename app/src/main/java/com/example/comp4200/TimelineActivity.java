@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.comp4200.model.Tweet;
+
 import java.util.ArrayList;
 
 public class TimelineActivity extends AppCompatActivity {

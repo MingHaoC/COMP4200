@@ -15,15 +15,17 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewTweets"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/etSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/looking_for_something"
         android:importantForAutofill="no"
@@ -40,11 +42,13 @@
         android:id="@+id/ibSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="28dp"
         android:background="#1E1E24"
         android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/etSearch"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/settings"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -53,9 +57,10 @@
         android:id="@+id/recyclerViewTweets"
         android:layout_width="406dp"
         android:layout_height="588dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainDivider"
         tools:listitem="@layout/tweet" />
@@ -69,5 +74,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_account_circle_24" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
