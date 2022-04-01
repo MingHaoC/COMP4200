@@ -1,0 +1,46 @@
+package com.example.comp4200;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewParent;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.ViewSwitcher;
+
+public class SettingsActivity extends AppCompatActivity {
+    TextView userName;
+    TextView userHandle;
+    TextView userDescription;
+    EditText nameText;
+    EditText handleText;
+    EditText descriptionText;
+    ImageButton imageButton;
+    Button logoutButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+
+        Bundle bundle = getIntent().getExtras(); //TODO: Or use shared preferences user
+        userName = findViewById(R.id.user_name);
+        userHandle = findViewById(R.id.user_handle);
+        userDescription = findViewById(R.id.user_description);
+        nameText = findViewById(R.id.edit_name);
+        handleText = findViewById(R.id.edit_handle);
+        descriptionText = findViewById(R.id.edit_description);
+        imageButton = findViewById(R.id.imageButton);
+        logoutButton = findViewById(R.id.logout_button);
+    }
+
+    public void editTextView(View view) {
+        ViewParent parent = view.getParent();
+        if (parent instanceof ViewSwitcher) {
+            ((ViewSwitcher) parent).showNext();
+        }
+    }
+}
