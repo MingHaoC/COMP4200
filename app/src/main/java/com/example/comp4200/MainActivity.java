@@ -31,32 +31,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button toComposeTweet = findViewById(R.id.tweet_button_main);
-
-        toComposeTweet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), ComposeTweetActivity.class));
-            }
-        });
-
         firebaseAuth = FirebaseAuth.getInstance();
+
         // authenticationService.register(this,"Test", "test", "chen1fl@uwindsor.ca", "password123!", "I am a new twitter user");
 
         // authenticationService.login(this, "chen1fl@uwindsor.ca", "password123!");
 
-        // authenticationService.logout(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user == null)
-            // todo: update this so it goes to the login activity instead of staying on the main screen
-            System.out.println("Not login");
-        else
-            System.out.println("Logged in");
+            startActivity(new Intent(this, LoginActivity.class));
     }
 
 }

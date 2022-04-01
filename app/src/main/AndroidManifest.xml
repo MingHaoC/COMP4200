@@ -15,7 +15,7 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".TimelineActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +35,16 @@
 
         <activity
             android:name=".LoginActivity"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+
+        <activity
+            android:name=".RegisterActivity"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="adjustPan">
             <meta-data
