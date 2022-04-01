@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
 import com.example.comp4200.service.AuthenticationService;
@@ -24,24 +23,18 @@ public class MainActivity extends AppCompatActivity {
         authenticationService = new AuthenticationServiceImpl();
 
         Button toComposeTweet = findViewById(R.id.tweet_button_main);
+        Button logout = findViewById(R.id.mainActivity_logout);
 
         toComposeTweet.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ComposeTweetActivity.class)));
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        // authenticationService.register(this,"Test", "test", "chen1fl@uwindsor.ca", "password123!", "I am a new twitter user");
-
-        // authenticationService.login(this, "chen1fl@uwindsor.ca", "password123!");
-
-        // authenticationService.logout(this);
+        logout.setOnClickListener(view -> authenticationService.logout(this));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user == null)
             startActivity(new Intent(this, LoginActivity.class));
-        else
-            System.out.println("Logged in");
     }
 }

@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/register_textEmail"
+        android:id="@+id/register_email"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
@@ -37,7 +37,7 @@
 
 
     <EditText
-        android:id="@+id/register_textPassword"
+        android:id="@+id/register_password"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
@@ -51,10 +51,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_textEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
     <EditText
-        android:id="@+id/register_displayName"
+        android:id="@+id/register_name"
         android:layout_width="300dp"
         android:layout_height="48dp"
         android:layout_marginStart="20dp"
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_textPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/register_password" />
 
     <EditText
         android:id="@+id/register_handle"
@@ -85,10 +85,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_displayName" />
+        app:layout_constraintTop_toBottomOf="@+id/register_name" />
 
     <Button
-        android:id="@+id/login_buttonLogin"
+        android:id="@+id/register_submit"
         android:layout_width="102dp"
         android:layout_height="58dp"
         android:layout_marginTop="40dp"
@@ -100,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/register_handle" />
 
     <TextView
-        android:id="@+id/login_textDonthave"
+        android:id="@+id/register_gotoLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -108,6 +108,6 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_buttonLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/register_submit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

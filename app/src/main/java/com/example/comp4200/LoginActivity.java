@@ -34,22 +34,21 @@ public class LoginActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.login_buttonLogin);
         loginButton.setOnClickListener(view -> {
             EditText username_email_text = findViewById(R.id.login_etextUsername);
-            EditText password_text =  findViewById(R.id.login_etextPassword);
+            EditText password_text = findViewById(R.id.login_etextPassword);
 
             String email = username_email_text.getText().toString();
             String password = password_text.getText().toString();
 
-            if(email.isEmpty() || password.isEmpty())
+            if (email.isEmpty() || password.isEmpty())
                 Toast.makeText(this, "email and password cannot be blank", Toast.LENGTH_LONG).show();
 
             authenticationService.login(this, email, password);
         });
 
         TextView registerText = findViewById(R.id.login_textDonthave);
-        registerText.setOnClickListener(view -> {
-            //send to register page
-            //startActivity(new Intent(view.getContext(), RegisterActivity.class));
-        });
+        registerText.setOnClickListener(view ->
+                startActivity(new Intent(view.getContext(), RegisterActivity.class))
+        );
 
     }
 
