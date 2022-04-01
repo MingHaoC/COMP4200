@@ -21,7 +21,6 @@ public class TimelineActivity extends AppCompatActivity {
     TweetRecyclerAdapter adapter;
     ArrayList<Tweet> tweets = new ArrayList<>();
 
-    AuthenticationService authenticationService = new AuthenticationServiceImpl();
     FirebaseAuth firebaseAuth;
 
     @Override

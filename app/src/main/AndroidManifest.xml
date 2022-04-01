@@ -23,20 +23,20 @@
       
         <activity
             android:name=".ComposeTweetActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".TimelineActivity"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".TimelineActivity" />
         </activity>
 
         <activity
             android:name=".LoginActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".TimelineActivity"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".TimelineActivity" />
         </activity>
 
         <activity
@@ -46,15 +46,15 @@
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".ProfileActivity">
+            android:parentActivityName=".ProfileActivity" />
 
         <activity
             android:name=".RegisterActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".TimelineActivity"
             android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".TimelineActivity" />
         </activity>
     </application>
 
