@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,12 +47,19 @@ public class ProfileActivity extends AppCompatActivity {
         name.setText(user.getDisplayName());
         description.setText(user.getDescription());
         handle.setText(user.getHandle());
-        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
+//        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
 //        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
         //TODO: Hide edit button on other peoples profiles
         if (this.userId == user.getId()){ //need current user
             editButton.setVisibility(View.VISIBLE);
         }
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void getTweets(View view) {

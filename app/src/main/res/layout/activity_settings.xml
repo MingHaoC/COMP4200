@@ -39,9 +39,10 @@
                 android:inputType="textPersonName" />
 
             <ImageButton
-                android:id="@+id/edit_name_button"
+                android:id="@+id/edit_name_submit"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="submitEditUser" />
         </LinearLayout>
     </ViewSwitcher>
 
@@ -73,7 +74,8 @@
             <ImageButton
                 android:id="@+id/edit_handle_submit"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="submitEditUser" />
         </LinearLayout>
     </ViewSwitcher>
 
@@ -105,7 +107,8 @@
             <ImageButton
                 android:id="@+id/edit_description_submit"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:onClick="submitEditUser" />
         </LinearLayout>
     </ViewSwitcher>
 
