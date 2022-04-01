@@ -45,7 +45,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
                     error = "";
                     //send tweet to db
                     //then send user back to home page/timeline
-                    startActivity(new Intent(view.getContext(), MainActivity.class));
+                    startActivity(new Intent(view.getContext(), TimelineActivity.class));
                 }
 
                 errorText.setText(error);

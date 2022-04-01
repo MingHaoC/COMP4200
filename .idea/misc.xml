@@ -8,8 +8,12 @@
         <entry key="..\:/Users/Ivan/AndroidStudioProjects/COMP4200/app/src/main/res/layout/compose_tweet.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Ivan/AndroidStudioProjects/COMP4200/app/src/main/res/layout/login_activity.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Ivan/AndroidStudioProjects/COMP4200/app/src/main/res/layout/post.xml" value="0.67" />
-        <entry key="..\:/Users/Shinobu Oshino/Documents/Github/COMP4200/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Shinobu Oshino/Documents/Github/COMP4200/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Shinobu Oshino/Documents/Github/COMP4200/app/src/main/res/layout/activity_profile.xml" value="0.2866847826086957" />
         <entry key="..\:/Users/Shinobu Oshino/Documents/Github/COMP4200/app/src/main/res/layout/activity_register.xml" value="0.2866847826086957" />
+        <entry key="..\:/Users/Shinobu Oshino/Documents/Github/COMP4200/app/src/main/res/layout/fragment_tweet.xml" value="0.2866847826086957" />
+        <entry key="..\:/Users/Shinobu Oshino/Documents/Github/COMP4200/app/src/main/res/layout/login_activity.xml" value="0.25" />
+        <entry key="..\:/Users/Shinobu Oshino/Documents/Github/COMP4200/app/src/main/res/layout/tweet.xml" value="0.2866847826086957" />
       </map>
     </option>
   </component>
