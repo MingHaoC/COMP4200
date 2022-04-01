@@ -14,7 +14,7 @@ public class ComposeTweetActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.compose_tweet);
+        setContentView(R.layout.activity_compose);
 
         //change this button to a FAB later
         Button tweetButton = findViewById(R.id.compose_buttonSubmit);
