@@ -7,6 +7,17 @@ public class User {
     private String handle;
     private String description;
 
+    public User(){
+
+    }
+
+    public User(String uid, String displayName, String handle, String description){
+        this.id = uid;
+        this.displayName = displayName;
+        this.handle = handle;
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
     }
