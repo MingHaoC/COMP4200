@@ -32,19 +32,14 @@ public class UserDao {
     }
 
     public void get(String id, UserCallback userCallback) {
-        databaseReference.child(id);
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
-                    if (user != null) {
-                        user.setId(snapshot.getKey());
-                        userCallback.onCallback(user);
-                        Log.d("TEST_SUCCESS", "Value is:" + user);
-                    } else {
-                        throw new AssertionError();
-                    }
+                    assert user != null;
+                    user.setId(snapshot.getKey());
+                    userCallback.onCallback(user);
                 }
             }
 
