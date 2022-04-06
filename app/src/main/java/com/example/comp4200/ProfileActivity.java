@@ -11,11 +11,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.comp4200.DAO.UserDao;
 import com.example.comp4200.fragment.Tweet;
 import com.example.comp4200.model.User;
-
-import java.time.LocalDateTime;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView name;
@@ -25,49 +25,60 @@ public class ProfileActivity extends AppCompatActivity {
     TextView date_created;
     Button editButton;
 
-    private String userId;
+    private User profileUser;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        isLoggedIn();
+        setViews();
 
-        //TODO: Get intent data or shared preferences
+        String userId = getIntent().getStringExtra("user_id");
+        if (userId == null || userId.isEmpty()) {
+            userId = currentUser != null ? currentUser.getUid() : "";
+        }
+        new UserDao().get(userId, user -> {
+            profileUser = user;
+            name.setText(profileUser.getDisplayName());
+            description.setText(profileUser.getDescription());
+            handle.setText(profileUser.getHandle());
 
+            if (currentUser.getUid().equals(profileUser.getId())) {
+                editButton.setVisibility(View.VISIBLE);
+            }
+        });
+//        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
+//        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
+
+        editButton.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    public void getTweets(View view) {
+        Tweet tweetFragment = Tweet.newInstance(profileUser.getId());
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.user_forums, tweetFragment);
+        ft.commit();
+    }
+
+    protected void isLoggedIn() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser == null)
+            startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    protected void setViews() {
         name = findViewById(R.id.user_name);
         description = findViewById(R.id.user_description);
         imageView = findViewById(R.id.user_image);
         handle = findViewById(R.id.user_handle);
         date_created = findViewById(R.id.user_created);
         editButton = findViewById(R.id.edit_profile);
-
-        //TODO: Populate Text with real user data
-        User user = new User();
-        this.userId = user.getId();
-        name.setText(user.getDisplayName());
-        description.setText(user.getDescription());
-        handle.setText(user.getHandle());
-
-        // date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
-//        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
-        //TODO: Hide edit button on other peoples profiles
-        if (this.userId == user.getId()){ //need current user
-            editButton.setVisibility(View.VISIBLE);
-        }
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    public void getTweets(View view) {
-        Tweet tweetFragment = Tweet.newInstance(userId);
-        FragmentManager fm=getSupportFragmentManager();
-        FragmentTransaction ft=fm.beginTransaction();
-        ft.replace(R.id.user_forums,tweetFragment);
-        ft.commit();
     }
 }

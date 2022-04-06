@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.comp4200.model.Tweet;
 import com.example.comp4200.service.AuthenticationService;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 
 public class TimelineActivity extends AppCompatActivity {
 
+    ImageView profileImage;
     RecyclerView recyclerView;
     TweetRecyclerAdapter adapter;
     ArrayList<Tweet> tweets = new ArrayList<>();
@@ -28,6 +31,7 @@ public class TimelineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
+        profileImage = findViewById(R.id.profileImage);
         recyclerView = findViewById(R.id.recyclerViewTweets);
 
         String tweet1 = "This is a tweet. I am testing tweets right now :D";
@@ -39,6 +43,7 @@ public class TimelineActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
         recyclerView.setAdapter(adapter);
 
+        profileImage.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
     }
 
     @Override
