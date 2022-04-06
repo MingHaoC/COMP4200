@@ -1,5 +1,9 @@
 package com.example.comp4200.DAO;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.example.comp4200.model.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -9,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 public class UserDao {
 
@@ -29,14 +32,19 @@ public class UserDao {
     }
 
     public void get(String id, UserCallback userCallback) {
-        databaseReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(id);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
-                    user.setId(snapshot.getKey());
-                    userCallback.onCallback(user);
-                    Log.d("TEST_SUCCESS", "Value is:" + user);
+                    if (user != null) {
+                        user.setId(snapshot.getKey());
+                        userCallback.onCallback(user);
+                        Log.d("TEST_SUCCESS", "Value is:" + user);
+                    } else {
+                        throw new AssertionError();
+                    }
                 }
             }
 
