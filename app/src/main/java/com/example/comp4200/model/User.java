@@ -7,6 +7,27 @@ public class User {
     private String handle;
     private String description;
 
+    public User() {}
+
+    public User(String id, String displayName) {
+        this.id = id;
+        this.displayName = displayName;
+        this.handle = handle;
+    }
+
+    public User(String id, String displayName, String handle) {
+        this.id = id;
+        this.displayName = displayName;
+        this.handle = handle;
+    }
+
+    public User(String id, String displayName, String handle, String description) {
+        this.id = id;
+        this.displayName = displayName;
+        this.handle = handle;
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
     }

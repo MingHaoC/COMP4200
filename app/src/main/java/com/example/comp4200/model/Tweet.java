@@ -1,33 +1,44 @@
 package com.example.comp4200.model;
 
+import java.util.Date;
+
 public class Tweet {
 
-    String content;
-    String display_name;
-    String date;
-    int userID;
+    private String tweetId;
+    private String content;
+    private String displayName;
+    private Date createdAt;
+    private String userID;
 
-    public Tweet(int userID, String content){
-
+    public Tweet(String userID, String displayName, Date createdAt, String content){
         this.userID = userID;
+        this.displayName = displayName;
+        this.createdAt = createdAt;
         this.content = content;
+    }
 
+    public Tweet(String userID, String displayName, Date createdAt, String content, String tweetId){
+        this.userID = userID;
+        this.displayName = displayName;
+        this.createdAt = createdAt;
+        this.content = content;
+        this.tweetId = tweetId;
     }
 
     public String getContent(){
         return this.content;
     }
 
-    public int getUserId(){
+    public String getUserId(){
         return this.userID;
     }
 
-    public String getDisplay_name(){
-        return this.display_name;
+    public String getDisplayName(){
+        return this.displayName;
     }
 
-    public String getDate(){
-        return date;
+    public Date getDate(){
+        return createdAt;
     }
 
 

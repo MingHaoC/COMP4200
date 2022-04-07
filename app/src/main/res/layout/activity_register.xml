@@ -106,6 +106,7 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="#9E0031"
         android:text="@string/sign_in"
+
         android:textColor="#FFF8F0"
         android:textColorHint="#709775"
         app:layout_constraintEnd_toEndOf="parent"
