@@ -1,12 +1,14 @@
 package com.example.comp4200;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,6 +22,8 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
 
     Context context;
     ArrayList<Tweet> tweets;
+    boolean liked = false;
+    int likeCount;
 
 
     public  TweetRecyclerAdapter(Context context, ArrayList<Tweet> tweets){
@@ -38,11 +42,42 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position){
 
+        //TODO: connect to db and set likeCount
+        // setting likeCount to 0 for now.
+        //int likes = something;
+        likeCount = 0;
+
         String tweetContent = tweets.get(position).getContent();
         String username = "" + tweets.get(position).getUserId();
 
         holder.tweetContent.setText(tweetContent);
         holder.tweetUser.setText(username);
+
+        holder.profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.getContext().startActivity(new Intent(view.getContext(), ProfileActivity.class));
+            }
+        });
+
+        //TODO: connect to DB and see if the current user has liked this tweet.
+        holder.likes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(liked){
+                    holder.likes.setImageResource(R.drawable.ic_outline_favorite_border_24);
+                    unlikeTweet();
+                    likeCount -= 1;
+                    holder.likeCounter.setText("" + likeCount);
+                }else{
+                    holder.likes.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    likeTweet();
+                    likeCount += 1;
+                    holder.likeCounter.setText("" + likeCount);
+                }
+
+            }
+        });
 
     }
 
@@ -55,13 +90,13 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
 
         TextView tweetUser;
         TextView tweetContent;
+        TextView likeCounter;
 
         CardView cardView;
 
         ImageButton likes;
         ImageButton replies;
 
-        ImageView tweetImage;
         ImageView profileImage;
 
         public ItemViewHolder(@NonNull View itemView){
@@ -72,14 +107,26 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
 
             cardView = itemView.findViewById(R.id.task);
 
-            likes = itemView.findViewById(R.id.ibComment2);
+            likes = itemView.findViewById(R.id.likeButton);
             replies = itemView.findViewById(R.id.ibComment);
+            profileImage = itemView.findViewById(R.id.profileImage);
 
-            tweetImage = itemView.findViewById(R.id.imageView2);
-            profileImage = itemView.findViewById(R.id.ivPostPicture);
+            likeCounter = itemView.findViewById(R.id.likeCounter);
 
         }
 
+    }
+
+    //TODO: connect to DB
+    //functions to interact with DB
+    public void likeTweet(){
+        Toast.makeText(this.context, "Liked tweet!", Toast.LENGTH_SHORT).show();
+        liked = true;
+    }
+
+    public void unlikeTweet(){
+        Toast.makeText(this.context, "Unliked tweet!" , Toast.LENGTH_SHORT).show();
+        liked = false;
     }
 
 }

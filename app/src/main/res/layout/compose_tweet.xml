@@ -51,21 +51,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/compose_etextComposition" />
 
-    <TextView
-        android:id="@+id/compose_textError"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:text="@string/error_text_placeholder"
-        android:textAlignment="gravity"
-        android:textAllCaps="false"
-        android:textColor="#F44336"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/compose_buttonSubmit"
-        app:layout_constraintHeight_min="50dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/compose_etextComposition"
-        app:layout_constraintWidth_min="250dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
