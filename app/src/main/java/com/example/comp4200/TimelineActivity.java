@@ -1,5 +1,6 @@
 package com.example.comp4200;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,8 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.comp4200.DAO.UserDao;
 import com.example.comp4200.model.Tweet;
@@ -22,8 +25,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TimelineActivity extends AppCompatActivity {
 
@@ -44,25 +54,14 @@ public class TimelineActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewTweets);
         profileImage = findViewById(R.id.imageView);
-        profileImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), ProfileActivity.class));
-            }
-        });
+        profileImage.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ProfileActivity.class)));
       
         adapter = new TweetRecyclerAdapter(TimelineActivity.this, tweets);
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
         recyclerView.setAdapter(adapter);
 
         composeTweetFAB = findViewById(R.id.composeTweetFAB);
-        composeTweetFAB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(view.getContext(), ComposeTweetActivity.class));
-            }
-        });
-
+        composeTweetFAB.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ComposeTweetActivity.class)));
     }
 
     @Override
@@ -74,7 +73,8 @@ public class TimelineActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             return;
         }
-        
+
+        // save the current logged in user info to the SharedPreferences
         userService = new UserServiceImpl();
         SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
