@@ -9,16 +9,17 @@
     android:textAlignment="textEnd">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/tweet_profileImage"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_marginStart="155dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="155dp"
         android:outlineAmbientShadowColor="#FFFFFF"
         android:outlineSpotShadowColor="#FFFFFF"
         android:src="@drawable/placeholder_profile"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ImageContrastCheck" />
@@ -28,7 +29,7 @@
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="25dp"
         android:background="@android:color/transparent"
         android:ems="10"
@@ -45,14 +46,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_min="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+        app:layout_constraintTop_toBottomOf="@+id/tweet_profileImage" />
 
     <Button
         android:id="@+id/compose_buttonSubmit"
         android:layout_width="106dp"
         android:layout_height="58dp"
         android:layout_marginStart="152dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="153dp"
         android:backgroundTint="#9E0031"
         android:text="@string/submit"

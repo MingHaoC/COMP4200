@@ -33,7 +33,7 @@
                 android:textColor="#FFF8F0"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/profileImage"
+                app:layout_constraintStart_toEndOf="@+id/tweet_profileImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -48,24 +48,24 @@
                 android:textColor="#FFF8F0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/profileImage"
+                app:layout_constraintStart_toEndOf="@+id/tweet_profileImage"
                 app:layout_constraintTop_toBottomOf="@+id/tvPostUsername" />
 
             <ImageButton
-                android:id="@+id/ibComment"
+                android:id="@+id/tweet_ibComment"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:background="#1E1E24"
+                android:contentDescription="@string/todo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profileImage"
+                app:layout_constraintTop_toBottomOf="@+id/tweet_profileImage"
                 app:srcCompat="@drawable/comment"
-                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck"
-                android:contentDescription="@string/todo" />
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profileImage"
+                android:id="@+id/tweet_profileImage"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="10dp"
@@ -77,29 +77,51 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ImageContrastCheck" />
 
-            <TextView
-                android:id="@+id/likeCounter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:text="@string/_0"
-                android:textColor="#FFF8F0"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-                app:layout_constraintTop_toBottomOf="@+id/profileImage" />
-
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/tweet_ibLike"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
                 android:background="#1E2424"
+                android:contentDescription="@string/todo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ibComment"
+                app:layout_constraintTop_toBottomOf="@+id/tweet_ibComment"
                 app:srcCompat="@drawable/like"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="@string/todo" />
+                tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck" />
+
+            <TextView
+                android:id="@+id/tweet_likeCounter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="103dp"
+                android:text="@string/_0"
+                android:textColor="#FFF8F0"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tweet_profileImage" />
+
+            <Button
+                android:id="@+id/tweet_uselessDividerButton"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:backgroundTint="#726DA8"
+                android:clickable="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/tweet_uselessDividerButton2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:backgroundTint="#726DA8"
+                android:clickable="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

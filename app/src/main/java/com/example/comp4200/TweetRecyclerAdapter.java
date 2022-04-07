@@ -65,12 +65,12 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
             @Override
             public void onClick(View view) {
                 if(liked){
-                    holder.likes.setImageResource(R.drawable.ic_outline_favorite_border_24);
+                    holder.likes.setImageResource(R.drawable.like);
                     unlikeTweet();
                     likeCount -= 1;
                     holder.likeCounter.setText("" + likeCount);
                 }else{
-                    holder.likes.setImageResource(R.drawable.ic_baseline_favorite_24);
+                    holder.likes.setImageResource(R.drawable.like_full);
                     likeTweet();
                     likeCount += 1;
                     holder.likeCounter.setText("" + likeCount);
@@ -107,11 +107,11 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
 
             cardView = itemView.findViewById(R.id.task);
 
-            likes = itemView.findViewById(R.id.likeButton);
-            replies = itemView.findViewById(R.id.ibComment);
-            profileImage = itemView.findViewById(R.id.profileImage);
+            likes = itemView.findViewById(R.id.tweet_ibLike);
+            replies = itemView.findViewById(R.id.tweet_ibComment);
+            profileImage = itemView.findViewById(R.id.tweet_profileImage);
 
-            likeCounter = itemView.findViewById(R.id.likeCounter);
+            likeCounter = itemView.findViewById(R.id.tweet_likeCounter);
 
         }
 
