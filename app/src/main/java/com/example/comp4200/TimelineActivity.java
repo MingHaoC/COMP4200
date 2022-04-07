@@ -4,15 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.comp4200.model.Tweet;
-import com.example.comp4200.service.AuthenticationService;
-import com.example.comp4200.service.impl.AuthenticationServiceImpl;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,7 +33,7 @@ public class TimelineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timeline);
 
         recyclerView = findViewById(R.id.recyclerViewTweets);
-        profileImage = findViewById(R.id.imageView);
+        profileImage = findViewById(R.id.timeline_imageProfile);
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +54,7 @@ public class TimelineActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
         recyclerView.setAdapter(adapter);
 
-        composeTweetFAB = findViewById(R.id.composeTweetFAB);
+        composeTweetFAB = findViewById(R.id.timeline_fabCompose);
         composeTweetFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

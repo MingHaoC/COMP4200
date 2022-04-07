@@ -10,14 +10,18 @@
     <string name="please_sign_in">Please sign in.</string>
     <string name="password">Password</string>
     <string name="sign_in">Sign In</string>
-    <string name="register">Register</string>
+    <string name="register2">Let\'s get you set up.</string>
     <string name="dont_have_an_account">Don\'t have an account?</string>
     <string name="username_or_email_address">Username or email address</string>
     <string name="re_enter_your_password">Re-enter your password.</string>
     <string name="login">Login</string>
     <string name="already_have_an_account">Already have an account?</string>
-    <string name="let_s_get_you_set_up">Let\'s get you set up.</string>
+    <string name="register">Register</string>
     <string name="create_a_strong_password">Create a strong password.</string>
     <string name="enter_your_email_address">Enter your email address.</string>
     <string name="create_your_username">Create your username.</string>
+    <string name="handle">Create your handle.</string>
+    <string name="click_here">Click Here</string>
+    <string name="home">Home</string>
+    <string name="_0">0</string>
 </resources>
