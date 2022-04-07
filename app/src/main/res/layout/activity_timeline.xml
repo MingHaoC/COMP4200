@@ -7,19 +7,6 @@
     android:background="#FFFFFF"
     tools:context=".TimelineActivity">
 
-    <View
-        android:id="@+id/mainDivider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="130dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewTweets"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
     <EditText
         android:id="@+id/etSearch"
         android:layout_width="wrap_content"
@@ -58,11 +45,10 @@
         android:layout_width="406dp"
         android:layout_height="588dp"
 
-        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainDivider"
+        app:layout_constraintTop_toTopOf="@+id/divider"
         tools:listitem="@layout/tweet" />
 
     <ImageView
@@ -81,7 +67,35 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
-        app:layout_constraintHorizontal_bias="0.904"
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/composeTweetFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:outlineAmbientShadowColor="#000000"
+        android:outlineSpotShadowColor="#000000"
+        app:backgroundTint="#726DA8"
+        app:borderWidth="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch" />
+    app:layout_constraintHorizontal_bias="0.904"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.035" />
