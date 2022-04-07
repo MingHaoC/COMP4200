@@ -14,9 +14,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/register"
-        android:textSize="30sp"
         android:textColor="#FFF8F0"
         android:textColorHint="#709775"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,12 +30,12 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="email address"
-        android:textColor="#FFF8F0"
-        android:textColorHint="#709775"
+        android:hint="@string/enter_your_email_address"
         android:importantForAutofill="no"
         android:inputType="textEmailAddress"
         android:textAlignment="center"
+        android:textColor="#FFF8F0"
+        android:textColorHint="#709775"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,16 +50,16 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
-        android:textColor="#FFF8F0"
-        android:textColorHint="#709775"
-        android:hint="@string/password"
+        android:hint="@string/create_a_strong_password"
         android:importantForAutofill="no"
         android:inputType="textVisiblePassword"
         android:textAlignment="center"
+        android:textColor="#FFF8F0"
+        android:textColorHint="#709775"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_email" />
+        app:layout_constraintTop_toBottomOf="@+id/register_name" />
 
     <EditText
         android:id="@+id/register_name"
@@ -69,16 +69,16 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="displayname"
+        android:hint="@string/create_your_username"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textAlignment="center"
         android:textColor="#FFF8F0"
         android:textColorHint="#709775"
-        android:importantForAutofill="no"
-        android:inputType="textVisiblePassword"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_password" />
+        app:layout_constraintTop_toBottomOf="@+id/register_email" />
 
     <EditText
         android:id="@+id/register_handle"
@@ -88,24 +88,25 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="handle"
+        android:hint="@string/handle"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textAlignment="center"
         android:textColor="#FFF8F0"
         android:textColorHint="#709775"
-        android:importantForAutofill="no"
-        android:inputType="textVisiblePassword"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_name" />
+        app:layout_constraintTop_toBottomOf="@+id/register_password" />
 
     <Button
         android:id="@+id/register_submit"
         android:layout_width="102dp"
         android:layout_height="58dp"
         android:layout_marginTop="40dp"
-        android:backgroundTint="#ADD8E6"
-        android:text="@string/sign_up"
+        android:backgroundTint="#9E0031"
+        android:text="@string/sign_in"
+
         android:textColor="#FFF8F0"
         android:textColorHint="#709775"
         app:layout_constraintEnd_toEndOf="parent"
@@ -114,15 +115,30 @@
         app:layout_constraintTop_toBottomOf="@+id/register_handle" />
 
     <TextView
-        android:id="@+id/register_gotoLogin"
+        android:id="@+id/login_textAlreadyHave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="already have an account? Click here"
-        android:textSize="16sp"
+        android:text="@string/already_have_an_account"
         android:textColor="#FFF8F0"
-        android:textColorHint="#709775"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_submit" />
+
+    <TextView
+        android:id="@+id/register_gotoLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/click_here"
+        android:textColor="#726DA8"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.759"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_submit" />
 
