@@ -49,6 +49,9 @@ public class TimelineActivity extends AppCompatActivity {
         String tweet2 = "This is another tweet. I am testing another tweet right now :):):)";
         tweets.add(new Tweet(1, tweet1));
         tweets.add(new Tweet(2, tweet2));
+        tweets.add(new Tweet(3, tweet2));
+        tweets.add(new Tweet(4, tweet2));
+        tweets.add(new Tweet(5, tweet2));
 
         adapter = new TweetRecyclerAdapter(TimelineActivity.this, tweets);
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
