@@ -50,7 +50,7 @@ public class TimelineActivity extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(), ProfileActivity.class));
             }
         });
-
+      
         adapter = new TweetRecyclerAdapter(TimelineActivity.this, tweets);
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
         recyclerView.setAdapter(adapter);
