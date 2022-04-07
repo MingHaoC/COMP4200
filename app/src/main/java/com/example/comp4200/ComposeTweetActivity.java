@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,23 +33,18 @@ public class ComposeTweetActivity extends AppCompatActivity {
                 EditText composeTweet = findViewById(R.id.compose_etextComposition);
                 String tweetText = composeTweet.getText().toString();
 
-                TextView errorText = findViewById(R.id.compose_textError);
-
-                String error;
-
                 if(tweetText.isEmpty()){
-                    error = "Tweet cannot be empty";
+                    Toast.makeText(view.getContext(), "Tweet cannot be empty", Toast.LENGTH_LONG).show();
 
                 }else if(tweetText.length() > 280){
-                    error = "Max tweet length is 280 characters.";
+                    Toast.makeText(view.getContext(), "Max tweet length is 280 characters.", Toast.LENGTH_LONG).show();
                 }else{
-                    error = "";
+                    //TODO connect to DB
                     //send tweet to db
                     //then send user back to home page/timeline
                     startActivity(new Intent(view.getContext(), TimelineActivity.class));
                 }
 
-                errorText.setText(error);
 
             }
         });
