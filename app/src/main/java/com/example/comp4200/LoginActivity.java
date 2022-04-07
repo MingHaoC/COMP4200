@@ -45,10 +45,11 @@ public class LoginActivity extends AppCompatActivity {
             authenticationService.login(this, email, password);
         });
 
-        TextView registerText = findViewById(R.id.login_textDonthave);
-        registerText.setOnClickListener(view ->
+        findViewById(R.id.login_textDonthave).setOnClickListener(view ->
                 startActivity(new Intent(view.getContext(), RegisterActivity.class))
         );
+
+        findViewById(R.id.login_textRegister).setOnClickListener(view -> startActivity(new Intent(view.getContext(), RegisterActivity.class)));
 
     }
 

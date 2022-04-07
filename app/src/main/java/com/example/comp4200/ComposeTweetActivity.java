@@ -23,9 +23,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
         setContentView(R.layout.compose_tweet);
 
         TweetService tweetService = new TweetServiceImpl();
-
-
-        //change this button to a FAB later
         Button tweetButton = findViewById(R.id.compose_buttonSubmit);
 
         /*
@@ -35,7 +32,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
          * @param view
          */
         tweetButton.setOnClickListener(view -> {
-
             EditText composeTweet = findViewById(R.id.compose_etextComposition);
             String tweetText = composeTweet.getText().toString();
 
@@ -49,9 +45,6 @@ public class ComposeTweetActivity extends AppCompatActivity {
                 tweetService.PostTweet(ComposeTweetActivity.this, tweetText, user);
                 startActivity(new Intent(view.getContext(), TimelineActivity.class));
             }
-
-
         });
-
     }
 }
