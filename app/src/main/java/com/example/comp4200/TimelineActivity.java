@@ -6,13 +6,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.comp4200.DAO.UserDao;
 import com.example.comp4200.model.Tweet;
+import com.example.comp4200.model.User;
 import com.example.comp4200.service.AuthenticationService;
+import com.example.comp4200.service.UserService;
 import com.example.comp4200.service.impl.AuthenticationServiceImpl;
+import com.example.comp4200.service.impl.UserServiceImpl;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,6 +35,7 @@ public class TimelineActivity extends AppCompatActivity {
     FloatingActionButton composeTweetFAB;
 
     FirebaseAuth firebaseAuth;
+    UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +50,7 @@ public class TimelineActivity extends AppCompatActivity {
                 startActivity(new Intent(view.getContext(), ProfileActivity.class));
             }
         });
-
-
-        String tweet1 = "This is a tweet. I am testing tweets right now :D";
-        String tweet2 = "This is another tweet. I am testing another tweet right now :):):)";
-        tweets.add(new Tweet(1, tweet1));
-        tweets.add(new Tweet(2, tweet2));
-
+      
         adapter = new TweetRecyclerAdapter(TimelineActivity.this, tweets);
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
         recyclerView.setAdapter(adapter);
@@ -68,9 +69,17 @@ public class TimelineActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user == null)
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser == null) {
             startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
+        
+        userService = new UserServiceImpl();
+        SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        userService.getUser(firebaseUser.getUid(), editor);
+
     }
 
 }

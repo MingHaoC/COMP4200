@@ -17,10 +17,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 
     FirebaseAuth firebaseAuth;
-    UserDao userDao = new UserDao();
+    UserDao userDao;
 
     public AuthenticationServiceImpl() {
         firebaseAuth = FirebaseAuth.getInstance();
+        userDao = new UserDao();
     }
 
     @Override
