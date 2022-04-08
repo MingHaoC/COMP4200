@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class UserDao {
 
-    private DatabaseReference databaseReference;
+    private final DatabaseReference databaseReference;
 
     public UserDao() {
         FirebaseDatabase db = FirebaseDatabase.getInstance();

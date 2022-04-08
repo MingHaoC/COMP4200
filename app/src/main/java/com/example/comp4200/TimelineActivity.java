@@ -5,54 +5,78 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.comp4200.DAO.UserDao;
 import com.example.comp4200.model.Tweet;
+import com.example.comp4200.model.User;
 import com.example.comp4200.service.AuthenticationService;
+import com.example.comp4200.service.UserService;
 import com.example.comp4200.service.impl.AuthenticationServiceImpl;
+import com.example.comp4200.service.impl.UserServiceImpl;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TimelineActivity extends AppCompatActivity {
 
-    ImageView profileImage;
     RecyclerView recyclerView;
     TweetRecyclerAdapter adapter;
     ArrayList<Tweet> tweets = new ArrayList<>();
+    ImageView profileImage;
+
+    FloatingActionButton composeTweetFAB;
 
     FirebaseAuth firebaseAuth;
+    UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        profileImage = findViewById(R.id.profileImage);
         recyclerView = findViewById(R.id.recyclerViewTweets);
-
-        String tweet1 = "This is a tweet. I am testing tweets right now :D";
-        String tweet2 = "This is another tweet. I am testing another tweet right now :):):)";
-        tweets.add(new Tweet(1, tweet1));
-        tweets.add(new Tweet(2, tweet2));
+        profileImage = findViewById(R.id.timeline_imageProfile);
+        profileImage.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ProfileActivity.class)));
 
         adapter = new TweetRecyclerAdapter(TimelineActivity.this, tweets);
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
         recyclerView.setAdapter(adapter);
 
-        profileImage.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ProfileActivity.class)));
+        composeTweetFAB = findViewById(R.id.timeline_fabCompose);
+        composeTweetFAB.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ComposeTweetActivity.class)));
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if (user == null)
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if (firebaseUser == null) {
             startActivity(new Intent(this, LoginActivity.class));
+            return;
+        }
+
+        // save the current logged in user info to the SharedPreferences
+        userService = new UserServiceImpl();
+        SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        userService.getUser(firebaseUser.getUid(), editor);
+
     }
 
 }
