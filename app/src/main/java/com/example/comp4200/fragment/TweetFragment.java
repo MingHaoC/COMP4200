@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.example.comp4200.R;
 import com.example.comp4200.TweetRecyclerAdapter;
 import com.example.comp4200.model.Tweet;
-import com.example.comp4200.service.FirebaseCallback;
 import com.example.comp4200.service.impl.TweetServiceImpl;
 
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class TweetFragment extends Fragment {
     private TweetRecyclerAdapter adapter;
 
     public TweetFragment() {
-        // Required empty public constructor
+        tweets = new ArrayList<>();
     }
 
     /**
@@ -50,7 +49,6 @@ public class TweetFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tweets = new ArrayList<>();
         if (getArguments() != null) {
             userId = getArguments().getString(ARG_USER_ID);
         }
@@ -60,15 +58,20 @@ public class TweetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tweet, container, false);
-        adapter = new TweetRecyclerAdapter(view.getContext(), tweets);
+        tweets.add(new Tweet("CONTENT", "NAME"));
+
+        adapter = new TweetRecyclerAdapter(getActivity(), tweets);
         recyclerView = view.findViewById(R.id.recyclerViewTweets);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
 
         if (!userId.isEmpty()) {
-            new TweetServiceImpl().getTweets(view.getContext(), userId, obj -> {
+            new TweetServiceImpl().getTweets(getActivity(), userId, obj -> {
+                tweets.clear();
                 if (obj instanceof List<?>) {
-                    tweets = (List<Tweet>) obj;
+                    for (Tweet tweet : (List<Tweet>) obj) {
+                        tweets.add(tweet);
+                    }
                     adapter.notifyDataSetChanged();
                 }
             });

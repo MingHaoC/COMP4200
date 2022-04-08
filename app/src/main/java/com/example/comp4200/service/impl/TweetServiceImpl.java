@@ -66,31 +66,4 @@ public class TweetServiceImpl implements TweetService {
             }
         });
     }
-
-    @Override
-    public void getTweets(Context context, String id, ArrayList<Tweet> tweets, TweetRecyclerAdapter adapter) {
-
-        // get the current user tweets tweets
-        databaseReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                        tweets.add( dataSnapshot.getValue(Tweet.class));
-
-                    adapter.notifyDataSetChanged();
-                } else
-                    Toast.makeText(context, "Could not fetch the tweets", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(context, "Server Error: Could not fetch the tweets", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        // get following tweets
-
-    }
-
 }
