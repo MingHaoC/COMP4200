@@ -50,6 +50,8 @@ public class TweetServiceImpl implements TweetService {
                 if(snapshot.exists()) {
                     for (DataSnapshot dataSnapshot : snapshot.getChildren())
                         tweets.add( dataSnapshot.getValue(Tweet.class));
+
+                    adapter.notifyDataSetChanged();
                 } else
                     Toast.makeText(context, "Could not fetch the tweets", Toast.LENGTH_LONG).show();
             }
