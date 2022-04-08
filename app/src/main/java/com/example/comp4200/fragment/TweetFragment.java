@@ -66,13 +66,10 @@ public class TweetFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         if (!userId.isEmpty()) {
-            new TweetServiceImpl().getTweets(view.getContext(), userId, new FirebaseCallback() {
-                @Override
-                public void onCallback(Object obj) {
-                    if (obj instanceof List<?>) {
-                        tweets = (List<Tweet>) obj;
-                        adapter.notifyDataSetChanged();
-                    }
+            new TweetServiceImpl().getTweets(view.getContext(), userId, obj -> {
+                if (obj instanceof List<?>) {
+                    tweets = (List<Tweet>) obj;
+                    adapter.notifyDataSetChanged();
                 }
             });
         }
