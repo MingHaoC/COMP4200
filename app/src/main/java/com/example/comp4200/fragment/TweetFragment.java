@@ -12,16 +12,16 @@ import com.example.comp4200.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class Tweet extends Fragment {
+public class TweetFragment extends Fragment {
 
     private static final String ARG_USER_ID = "user_id";
 
     private String userId;
-    private ArrayList<Object> tweets; //TODO: needs tweet model
+    private List<TweetFragment> tweets; //TODO: needs tweet model
 
-    public Tweet() {
+    public TweetFragment() {
         // Required empty public constructor
     }
 
@@ -32,8 +32,8 @@ public class Tweet extends Fragment {
      * @param userId User ID to filter.
      * @return A new instance of fragment Tweet.
      */
-    public static Tweet newInstance(String userId) {
-        Tweet fragment = new Tweet();
+    public static TweetFragment newInstance(String userId) {
+        TweetFragment fragment = new TweetFragment();
         Bundle args = new Bundle();
         args.putString(ARG_USER_ID, userId);
         fragment.setArguments(args);

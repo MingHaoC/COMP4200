@@ -50,7 +50,7 @@ public class UserDao {
         });
     }
 
-    public interface UserCallback {
+    public interface UserCallback { //Used for the async nature of the database
         void onCallback(User user);
     }
 }
