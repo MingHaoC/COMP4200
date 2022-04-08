@@ -84,7 +84,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public void logout(Context context) {
         firebaseAuth.signOut();
-        context.startActivity(new Intent(context, LoginActivity.class));
+        Intent login = new Intent(context, LoginActivity.class);
+        login.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(login);
     }
 
 }

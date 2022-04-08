@@ -15,6 +15,7 @@ import android.widget.ViewSwitcher;
 
 import com.example.comp4200.DAO.UserDao;
 import com.example.comp4200.model.User;
+import com.example.comp4200.service.impl.AuthenticationServiceImpl;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -57,6 +58,8 @@ public class SettingsActivity extends AppCompatActivity {
                 userDescription.setText(currentUser.getDescription());
             }
         });
+
+        logoutButton.setOnClickListener(view -> new AuthenticationServiceImpl().logout(getApplicationContext()));
     }
 
     protected FirebaseUser getLoggedInUser() {
