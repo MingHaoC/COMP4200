@@ -2,16 +2,24 @@ package com.example.comp4200;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
+
+import com.example.comp4200.DAO.UserDao;
+import com.example.comp4200.model.User;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.util.HashMap;
 
 public class SettingsActivity extends AppCompatActivity {
     TextView userName;
@@ -23,12 +31,14 @@ public class SettingsActivity extends AppCompatActivity {
     ImageButton imageButton;
     Button logoutButton;
 
+    private User currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        FirebaseUser firebaseUser = getLoggedInUser();
 
-        Bundle bundle = getIntent().getExtras(); //TODO: Or use shared preferences user
         userName = findViewById(R.id.user_name);
         userHandle = findViewById(R.id.user_handle);
         userDescription = findViewById(R.id.user_description);
@@ -37,6 +47,23 @@ public class SettingsActivity extends AppCompatActivity {
         descriptionText = findViewById(R.id.edit_description);
         imageButton = findViewById(R.id.imageButton);
         logoutButton = findViewById(R.id.logout_button);
+
+        new UserDao().get(firebaseUser.getUid(), user -> {
+            currentUser = user;
+            currentUser.setId(firebaseUser.getUid());
+            userName.setText(currentUser.getDisplayName());
+            userHandle.setText(currentUser.getHandle());
+            if (currentUser.getDescription() != null) {
+                userDescription.setText(currentUser.getDescription());
+            }
+        });
+    }
+
+    protected FirebaseUser getLoggedInUser() {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser == null)
+            startActivity(new Intent(this, LoginActivity.class));
+        return firebaseUser;
     }
 
     public void editTextView(View view) {
@@ -60,22 +87,38 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void submitEditUser(View view) {
         String editText;
-        switch (view.getId()) { //TODO: Save to database
+        HashMap<String, Object> attributes = new HashMap<>();
+        switch (view.getId()) { //TODO: This could probably be cleaner
             case R.id.edit_name_submit:
                 editText = nameText.getText().toString();
+                if (editText.length() < 1) {
+                    Toast.makeText(this, "Display name cannot be empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 userName.setText(editText);
+                currentUser.setDisplayName(editText);
+                attributes.put("displayName", editText);
                 break;
             case R.id.edit_handle_submit:
                 editText = handleText.getText().toString();
+                if (editText.length() < 1) {
+                    Toast.makeText(this, "Handle cannot be empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 userHandle.setText(editText);
+                currentUser.setHandle(editText);
+                attributes.put("handle", editText);
                 break;
             case R.id.edit_description_submit:
                 editText = descriptionText.getText().toString();
                 userDescription.setText(editText);
+                currentUser.setDescription(editText);
+                attributes.put("description", editText);
                 break;
         }
-        //TODO: Display toast based on firebase output
-        Toast.makeText(this, "Saved successful", Toast.LENGTH_SHORT);
+        Task<Void> update = new UserDao().update(currentUser.getId(), attributes);
+        Toast.makeText(this, update.isSuccessful() ? "Update successful" : "Update unsuccessful", Toast.LENGTH_SHORT);
+
 
         ViewParent parent = view.getParent();
         if (parent != null && parent.getParent() instanceof ViewSwitcher) {

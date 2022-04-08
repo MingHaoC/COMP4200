@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.comp4200.DAO.UserDao;
-import com.example.comp4200.fragment.Tweet;
+import com.example.comp4200.fragment.TweetFragment;
 import com.example.comp4200.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,13 +39,13 @@ public class ProfileActivity extends AppCompatActivity {
         if (userId == null || userId.isEmpty()) {
             userId = currentUser != null ? currentUser.getUid() : "";
         }
+        String finalUserId = userId;
         new UserDao().get(userId, user -> {
             profileUser = user;
             name.setText(profileUser.getDisplayName());
             description.setText(profileUser.getDescription());
             handle.setText(profileUser.getHandle());
-
-            if (currentUser.getUid().equals(profileUser.getId())) {
+            if (currentUser.getUid().equals(finalUserId)) {
                 editButton.setVisibility(View.VISIBLE);
             }
         });
@@ -59,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getTweets(View view) {
-        Tweet tweetFragment = Tweet.newInstance(profileUser.getId());
+        TweetFragment tweetFragment = TweetFragment.newInstance(profileUser.getId());
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.user_forums, tweetFragment);

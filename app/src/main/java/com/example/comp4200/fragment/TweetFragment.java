@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.comp4200.R;
+import com.example.comp4200.model.Tweet;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -19,7 +20,7 @@ public class TweetFragment extends Fragment {
     private static final String ARG_USER_ID = "user_id";
 
     private String userId;
-    private List<TweetFragment> tweets; //TODO: needs tweet model
+    private List<Tweet> tweets;
 
     public TweetFragment() {
         // Required empty public constructor
