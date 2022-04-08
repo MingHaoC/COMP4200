@@ -48,7 +48,7 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
         likeCount = 0;
 
         String tweetContent = tweets.get(position).getContent();
-        String username = "" + tweets.get(position).getUserId();
+        String username = "" + tweets.get(position).getDisplayName();
 
         holder.tweetContent.setText(tweetContent);
         holder.tweetUser.setText(username);
