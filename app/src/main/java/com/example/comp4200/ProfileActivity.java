@@ -59,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
             if (currentUser.getUid().equals(finalUserId)) {
                 editButton.setVisibility(View.VISIBLE);
             }
-//            getTweets(new View(getApplicationContext()));
+            getTweets(new View(getApplicationContext()));
         });
 //        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
 //        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved

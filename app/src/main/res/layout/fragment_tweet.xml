@@ -5,10 +5,14 @@
     android:layout_height="match_parent"
     tools:context=".fragment.TweetFragment">
 
-    <!-- TODO: Update blank fragment layout with Recycler View of tweets -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTweets"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Some Tweets" />
+        android:layout_height="0dp"
+
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:paddingBottom="100dp"
+        tools:listitem="@layout/tweet" />
 
 </FrameLayout>

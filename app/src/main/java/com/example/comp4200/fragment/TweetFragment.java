@@ -3,16 +3,20 @@ package com.example.comp4200.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.comp4200.R;
+import com.example.comp4200.TweetRecyclerAdapter;
 import com.example.comp4200.model.Tweet;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.comp4200.service.FirebaseCallback;
+import com.example.comp4200.service.impl.TweetServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TweetFragment extends Fragment {
@@ -21,6 +25,8 @@ public class TweetFragment extends Fragment {
 
     private String userId;
     private List<Tweet> tweets;
+    private RecyclerView recyclerView;
+    private TweetRecyclerAdapter adapter;
 
     public TweetFragment() {
         // Required empty public constructor
@@ -44,20 +50,32 @@ public class TweetFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        tweets = new ArrayList<>();
         if (getArguments() != null) {
             userId = getArguments().getString(ARG_USER_ID);
-        }
-
-        if (!userId.isEmpty()){
-            DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-            // TODO: Get List of Tweets filtered by userId
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tweet, container, false);
+        View view = inflater.inflate(R.layout.fragment_tweet, container, false);
+        adapter = new TweetRecyclerAdapter(view.getContext(), tweets);
+        recyclerView = view.findViewById(R.id.recyclerViewTweets);
+        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        recyclerView.setAdapter(adapter);
+
+        if (!userId.isEmpty()) {
+            new TweetServiceImpl().getTweets(view.getContext(), userId, new FirebaseCallback() {
+                @Override
+                public void onCallback(Object obj) {
+                    if (obj instanceof List<?>) {
+                        tweets = (List<Tweet>) obj;
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+        return view;
     }
 }

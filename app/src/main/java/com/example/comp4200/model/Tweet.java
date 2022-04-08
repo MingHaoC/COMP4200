@@ -10,14 +10,17 @@ public class Tweet {
     private Date createdAt;
     private String userID;
 
-    public Tweet(String userID, String displayName, Date createdAt, String content){
+    public Tweet() {
+    }
+
+    public Tweet(String userID, String displayName, Date createdAt, String content) {
         this.userID = userID;
         this.displayName = displayName;
         this.createdAt = createdAt;
         this.content = content;
     }
 
-    public Tweet(String userID, String displayName, Date createdAt, String content, String tweetId){
+    public Tweet(String userID, String displayName, Date createdAt, String content, String tweetId) {
         this.userID = userID;
         this.displayName = displayName;
         this.createdAt = createdAt;
@@ -25,19 +28,19 @@ public class Tweet {
         this.tweetId = tweetId;
     }
 
-    public String getContent(){
+    public String getContent() {
         return this.content;
     }
 
-    public String getUserId(){
+    public String getUserId() {
         return this.userID;
     }
 
-    public String getDisplayName(){
+    public String getDisplayName() {
         return this.displayName;
     }
 
-    public Date getDate(){
+    public Date getDate() {
         return createdAt;
     }
 
