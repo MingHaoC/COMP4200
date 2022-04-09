@@ -31,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/name_switcher">
 
         <TextView
-            android:id="@+id/user_handle"
+            android:id="@+id/profile_handle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Click to edit your handle."
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/handle_switcher">
 
         <TextView
-            android:id="@+id/user_description"
+            android:id="@+id/profile_desc"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Click to edit your description."
@@ -110,7 +110,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <TextView
-            android:id="@+id/user_name"
+            android:id="@+id/profile_username"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Click to edit your username."

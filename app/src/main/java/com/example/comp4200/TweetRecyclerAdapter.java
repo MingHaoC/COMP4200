@@ -108,7 +108,7 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
             cardView = itemView.findViewById(R.id.task);
 
             likes = itemView.findViewById(R.id.tweet_ibLike);
-            replies = itemView.findViewById(R.id.tweet_ibComment);
+            //replies = itemView.findViewById(R.id.tweet_ibComment);
             profileImage = itemView.findViewById(R.id.tweet_profileImage);
 
             likeCounter = itemView.findViewById(R.id.tweet_likeCounter);

@@ -4,105 +4,161 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1E1E24"
     tools:context=".ProfileActivity">
 
-    <ImageView
-        android:id="@+id/user_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/profile_return"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="152dp"
+        android:backgroundTint="#9E0031"
+        android:text="Return"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/black"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_follow" />
 
     <Button
-        android:id="@+id/edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Edit Profile"
+        android:id="@+id/profile_settings"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="152dp"
+        android:backgroundTint="#9E0031"
+        android:text="Settings"
+        android:textSize="14sp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_likedTweets"
+        tools:ignore="DuplicateClickableBoundsCheck" />
+
+    <TextView
+        android:id="@+id/profile_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="136dp"
+        android:text="@string/profile"
+        android:textColor="#FFF8F0"
+        android:textSize="38sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_image" />
-
-    <TextView
-        android:id="@+id/user_handle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Handle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_name" />
-
-    <TextView
-        android:id="@+id/user_created"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Joined Date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_description" />
-
-    <TextView
-        android:id="@+id/user_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Some Description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_handle" />
-
-    <TextView
-        android:id="@+id/user_something"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Some other information"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_created" />
-
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/profile_follow"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Somthing else"
+        android:layout_height="58dp"
+        android:layout_marginStart="154dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="155dp"
+        android:backgroundTint="#9E0031"
+        android:text="Follow"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/user_something" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_postedTweets"
+        app:layout_constraintWidth_min="108dp" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your Tweets"
-        android:onClick="getTweets"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:id="@+id/profile_likedTweets"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="#9E0031"
+        android:text="Liked Tweets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_desc" />
+
+    <Button
+        android:id="@+id/profile_postedTweets"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#9E0031"
+        android:text="Posted Tweets"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_something" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_desc" />
+
+    <TextView
+        android:id="@+id/profile_username"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="81dp"
+        android:text="@string/display_name_missing"
+        android:textAlignment="center"
+        android:textColor="#726DA8"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_title" />
+
+    <TextView
+        android:id="@+id/profile_handle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="81dp"
+        android:text="Handle missing"
+        android:textAlignment="center"
+        android:textColor="#726DA8"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_username" />
+
+    <TextView
+        android:id="@+id/profile_joindate"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="81dp"
+        android:text="Join date missing"
+        android:textAlignment="center"
+        android:textColor="#726DA8"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_handle"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/profile_desc"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="81dp"
+        android:text="Description missing"
+        android:textAlignment="center"
+        android:textColor="#726DA8"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_joindate"
+        tools:ignore="TextContrastCheck" />
 
     <FrameLayout
         android:id="@+id/user_forums"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"/>
-
-    <Button
-        android:id="@+id/followButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
-        android:text="Follow"
-        app:layout_constraintStart_toEndOf="@+id/user_image"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_return" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

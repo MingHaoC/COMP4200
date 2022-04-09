@@ -37,13 +37,15 @@
 
     <ImageButton
         android:id="@+id/timeline_buttonSettings"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="50dp"
+        android:layout_height="103dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="11dp"
         android:background="#1E1E24"
         android:contentDescription="@string/todo"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mainDivider"
+        app:layout_constraintEnd_toStartOf="@+id/timeline_imageProfile"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/settings"
         tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
@@ -70,9 +72,11 @@
         android:id="@+id/timeline_imageProfile"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:src="@drawable/ic_launcher_background"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="14dp"
+        android:src="@drawable/icon_avatar"
+        app:layout_constraintBottom_toTopOf="@+id/mainDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -112,16 +116,18 @@
 
     <TextView
         android:id="@+id/timeline_textHome"
-        android:layout_width="150dp"
+        android:layout_width="175dp"
         android:layout_height="50dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/home"
         android:textAlignment="center"
         android:textColor="#FFF8F0"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/timeline_buttonSettings"
+        app:layout_constraintBottom_toTopOf="@+id/mainDivider"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

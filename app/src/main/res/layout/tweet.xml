@@ -20,87 +20,65 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:background="#1E1E24">
 
             <TextView
                 android:id="@+id/tvPostUsername"
-                android:layout_width="wrap_content"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="17dp"
                 android:text="@string/placeholder_username"
                 android:textColor="#FFF8F0"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/tweet_profileImage"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvPostDesc"
-                android:layout_width="wrap_content"
+                android:layout_width="285dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="17dp"
                 android:maxWidth="280dp"
                 android:text="@string/placeholder_description"
                 android:textColor="#FFF8F0"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/tweet_profileImage"
+                app:layout_constraintStart_toEndOf="@+id/tweet_ibLike"
                 app:layout_constraintTop_toBottomOf="@+id/tvPostUsername" />
 
-            <ImageButton
-                android:id="@+id/tweet_ibComment"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:background="#1E1E24"
-                android:contentDescription="@string/todo"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tweet_profileImage"
-                app:srcCompat="@drawable/comment"
-                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/tweet_profileImage"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:outlineAmbientShadowColor="#FFFFFF"
-                android:outlineSpotShadowColor="#FFFFFF"
-                android:src="@drawable/placeholder_profile"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ImageContrastCheck" />
 
             <ImageButton
                 android:id="@+id/tweet_ibLike"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
-                android:background="#1E2424"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:background="#1E1E24"
                 android:contentDescription="@string/todo"
+                android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tweet_ibComment"
+                app:layout_constraintTop_toBottomOf="@+id/imageButton"
                 app:srcCompat="@drawable/like"
                 tools:ignore="SpeakableTextPresentCheck,DuplicateClickableBoundsCheck" />
 
             <TextView
                 android:id="@+id/tweet_likeCounter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="103dp"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="65dp"
                 android:text="@string/_0"
-                android:textColor="#FFF8F0"
+                android:textAlignment="center"
+                android:textColor="#D81B1B"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tweet_profileImage" />
+                app:layout_constraintTop_toBottomOf="@id/imageButton" />
 
             <Button
                 android:id="@+id/tweet_uselessDividerButton"
@@ -122,6 +100,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tweet_uselessDividerButton"
+                app:srcCompat="@drawable/icon_avatar_tweet"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

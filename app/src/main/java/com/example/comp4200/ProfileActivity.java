@@ -1,6 +1,7 @@
 package com.example.comp4200;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -8,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +21,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class ProfileActivity extends AppCompatActivity {
     TextView name;
     TextView description;
-    ImageView imageView;
     TextView handle;
     TextView date_created;
-    Button editButton, followButton;
+    Button settingsButton, followButton, likedTweetsButton, postedTweetsButton, returnButton;
     boolean following = false;
 
     private User profileUser;
@@ -37,13 +36,14 @@ public class ProfileActivity extends AppCompatActivity {
         getLoggedInUser();
         setViews();
 
-        name = findViewById(R.id.user_name);
-        description = findViewById(R.id.user_description);
-        imageView = findViewById(R.id.user_image);
-        handle = findViewById(R.id.user_handle);
-        date_created = findViewById(R.id.user_created);
-        editButton = findViewById(R.id.edit_profile);
-        followButton = findViewById(R.id.followButton);
+        name = findViewById(R.id.profile_username);
+        description = findViewById(R.id.profile_desc);
+        handle = findViewById(R.id.profile_handle);
+        date_created = findViewById(R.id.profile_joindate);
+        followButton = findViewById(R.id.profile_follow);
+        likedTweetsButton = findViewById(R.id.profile_likedTweets);
+        postedTweetsButton = findViewById(R.id.profile_postedTweets);
+        settingsButton = findViewById(R.id.profile_settings);
 
         String userId = getIntent().getStringExtra("user_id");
         if (userId == null || userId.isEmpty()) {
@@ -56,15 +56,24 @@ public class ProfileActivity extends AppCompatActivity {
             name.setText(profileUser.getDisplayName());
             description.setText(profileUser.getDescription());
             handle.setText(profileUser.getHandle());
-            if (currentUser.getUid().equals(finalUserId)) {
-                editButton.setVisibility(View.VISIBLE);
+
+            // NOTE: This needs to be called to show the follow and settings buttons
+            if (currentUser.getUid().equals(finalUserId)) { //If the user is looking at their own profile
+                settingsButton.setVisibility(View.VISIBLE);
+                followButton.setVisibility(View.INVISIBLE);
+                // Go to the settings menu from your own profile
+            }
+            else //if the user is looking at someone else's profile
+            {
+                settingsButton.setVisibility(View.INVISIBLE);
+                followButton.setVisibility(View.VISIBLE);
             }
             getTweets(new View(getApplicationContext()));
         });
 //        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
 //        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
 
-        editButton.setOnClickListener(view -> {
+        settingsButton.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(intent);
         });
@@ -88,6 +97,10 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Go to timeline from profile
+        returnButton = findViewById(R.id.profile_return);
+        returnButton.setOnClickListener(view -> startActivity(new Intent(view.getContext(), TimelineActivity.class)));
     }
 
     public void getTweets(View view) {
@@ -120,11 +133,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     protected void setViews() {
-        name = findViewById(R.id.user_name);
-        description = findViewById(R.id.user_description);
-        imageView = findViewById(R.id.user_image);
-        handle = findViewById(R.id.user_handle);
-        date_created = findViewById(R.id.user_created);
-        editButton = findViewById(R.id.edit_profile);
+        name = findViewById(R.id.profile_username);
+        description = findViewById(R.id.profile_desc);
+        handle = findViewById(R.id.profile_handle);
+        date_created = findViewById(R.id.profile_joindate);
     }
 }
