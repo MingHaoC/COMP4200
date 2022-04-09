@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.comp4200.fragment.Tweet;
+import com.example.comp4200.DAO.UserDao;
+import com.example.comp4200.fragment.TweetFragment;
 import com.example.comp4200.model.User;
-
-import java.time.LocalDateTime;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView name;
@@ -27,14 +27,15 @@ public class ProfileActivity extends AppCompatActivity {
     Button editButton, followButton;
     boolean following = false;
 
-    private String userId;
+    private User profileUser;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        //TODO: Get intent data or shared preferences
+        getLoggedInUser();
+        setViews();
 
         name = findViewById(R.id.user_name);
         description = findViewById(R.id.user_description);
@@ -44,28 +45,29 @@ public class ProfileActivity extends AppCompatActivity {
         editButton = findViewById(R.id.edit_profile);
         followButton = findViewById(R.id.followButton);
 
-        //TODO: Populate Text with real user data
-        User user = new User();
-        this.userId = user.getId();
-        name.setText(user.getDisplayName());
-        description.setText(user.getDescription());
-        handle.setText(user.getHandle());
-
-        // date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
-//        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
-        //TODO: Hide edit button on other peoples profiles
-        if (this.userId == user.getId()){ //need current user
-            editButton.setVisibility(View.VISIBLE);
+        String userId = getIntent().getStringExtra("user_id");
+        if (userId == null || userId.isEmpty()) {
+            userId = currentUser != null ? currentUser.getUid() : "";
         }
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(intent);
+        String finalUserId = userId;
+        new UserDao().get(userId, user -> {
+            profileUser = user;
+            profileUser.setId(finalUserId);
+            name.setText(profileUser.getDisplayName());
+            description.setText(profileUser.getDescription());
+            handle.setText(profileUser.getHandle());
+            if (currentUser.getUid().equals(finalUserId)) {
+                editButton.setVisibility(View.VISIBLE);
             }
+            getTweets(new View(getApplicationContext()));
         });
+//        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
+//        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
 
-
+        editButton.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+        });
 
         //TODO: connect to DB
         //check if the user is already following the person
@@ -89,10 +91,10 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getTweets(View view) {
-        Tweet tweetFragment = Tweet.newInstance(userId);
-        FragmentManager fm=getSupportFragmentManager();
-        FragmentTransaction ft=fm.beginTransaction();
-        ft.replace(R.id.user_forums,tweetFragment);
+        TweetFragment tweetFragment = TweetFragment.newInstance(profileUser.getId());
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.user_forums, tweetFragment);
         ft.commit();
     }
 
@@ -110,5 +112,19 @@ public class ProfileActivity extends AppCompatActivity {
         following = true;
     }
 
+    protected void getLoggedInUser() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        if (currentUser == null)
+            startActivity(new Intent(this, LoginActivity.class));
+    }
 
+    protected void setViews() {
+        name = findViewById(R.id.user_name);
+        description = findViewById(R.id.user_description);
+        imageView = findViewById(R.id.user_image);
+        handle = findViewById(R.id.user_handle);
+        date_created = findViewById(R.id.user_created);
+        editButton = findViewById(R.id.edit_profile);
+    }
 }

@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.comp4200.model.Tweet;
-import com.example.comp4200.service.TweetService;
 import com.example.comp4200.service.UserService;
 import com.example.comp4200.service.impl.TweetServiceImpl;
 import com.example.comp4200.service.impl.UserServiceImpl;
@@ -19,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TimelineActivity extends AppCompatActivity {
 
@@ -39,24 +39,30 @@ public class TimelineActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         userService.getUser(firebaseUser.getUid(), editor);
-
         // Recycler view and adapter
-        ArrayList<Tweet> tweets = new ArrayList<>();
+        List<Tweet> tweets = new ArrayList<>();
         TweetRecyclerAdapter adapter = new TweetRecyclerAdapter(TimelineActivity.this, tweets);
         RecyclerView recyclerView = findViewById(R.id.recyclerViewTweets);
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
         recyclerView.setAdapter(adapter);
 
         // Get tweet for user
-        TweetService tweetService = new TweetServiceImpl();
-        tweetService.getTweets(this, firebaseUser.getUid(), tweets, adapter);
+        new TweetServiceImpl().getTweets(this, firebaseUser.getUid(), obj -> {
+            tweets.clear();
+            if (obj instanceof List<?>) {
+                for (Tweet tweet : (List<Tweet>) obj) {
+                    tweets.add(tweet);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         // Post tweet button
-        FloatingActionButton composeTweetFAB = findViewById(R.id.composeTweetFAB);
+        FloatingActionButton composeTweetFAB = findViewById(R.id.timeline_fabCompose);
         composeTweetFAB.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ComposeTweetActivity.class)));
 
         // Add listener for the image to go to profile when click
-        ImageView profileImage = findViewById(R.id.imageView);
+        ImageView profileImage = findViewById(R.id.timeline_imageProfile);
         profileImage.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ProfileActivity.class)));
     }
 }

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="#1E1E24"
     tools:context=".TimelineActivity">
+
     <View
         android:id="@+id/mainDivider"
         android:layout_width="match_parent"

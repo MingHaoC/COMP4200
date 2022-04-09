@@ -1,13 +1,14 @@
 package com.example.comp4200.service.impl;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.comp4200.TweetRecyclerAdapter;
 import com.example.comp4200.model.Tweet;
 import com.example.comp4200.model.User;
+import com.example.comp4200.service.FirebaseCallback;
 import com.example.comp4200.service.TweetService;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class TweetServiceImpl implements TweetService {
@@ -37,33 +39,31 @@ public class TweetServiceImpl implements TweetService {
             else
                 Toast.makeText(context, "Error: tweet could not be posted", Toast.LENGTH_LONG).show();
         });
-
     }
 
     @Override
-    public void getTweets(Context context, String id, ArrayList<Tweet> tweets, TweetRecyclerAdapter adapter) {
+    public void getTweets(Context context, FirebaseCallback callback) {
+        //TODO: Get tweets of most recent
+    }
 
-        // get the current user tweets tweets
-        databaseReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+    @Override
+    public void getTweets(Context context, String id, FirebaseCallback callback) {
+        databaseReference.child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                        tweets.add( dataSnapshot.getValue(Tweet.class));
-
-                    adapter.notifyDataSetChanged();
+                if (snapshot.exists()) {
+                    List<Tweet> tweets = new ArrayList<>();
+                    for (DataSnapshot ds : snapshot.getChildren())
+                        tweets.add(ds.getValue(Tweet.class));
+                    callback.onCallback(tweets);
                 } else
                     Toast.makeText(context, "Could not fetch the tweets", Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(context, "Server Error: Could not fetch the tweets", Toast.LENGTH_LONG).show();
+                Log.w("TWEET_GET_ID", "onCancelled: ", error.toException());
             }
         });
-
-        // get following tweets
-
     }
-
 }

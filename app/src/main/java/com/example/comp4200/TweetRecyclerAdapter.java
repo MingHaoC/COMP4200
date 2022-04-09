@@ -16,17 +16,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp4200.model.Tweet;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdapter.ItemViewHolder> {
 
     Context context;
-    ArrayList<Tweet> tweets;
+    List<Tweet> tweets;
     boolean liked = false;
     int likeCount;
 
 
-    public  TweetRecyclerAdapter(Context context, ArrayList<Tweet> tweets){
+    public  TweetRecyclerAdapter(Context context, List<Tweet> tweets){
         this.context = context;
         this.tweets = tweets;
     }

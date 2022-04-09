@@ -7,12 +7,13 @@ public class User {
     private String handle;
     private String description;
 
-    public User() {}
+    public User(){
+
+    }
 
     public User(String id, String displayName) {
         this.id = id;
         this.displayName = displayName;
-        this.handle = handle;
     }
 
     public User(String id, String displayName, String handle) {
@@ -40,9 +41,7 @@ public class User {
         return id;
     }
 
-    public void setId(String s) {
-        this.id = id;
-    }
+    public void setId(String id) { this.id = id; }
 
     public String getDisplayName() {
         return displayName;
