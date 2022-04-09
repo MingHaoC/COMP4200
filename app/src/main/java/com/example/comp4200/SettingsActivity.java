@@ -9,6 +9,7 @@ import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -29,10 +30,13 @@ public class SettingsActivity extends AppCompatActivity {
     EditText nameText;
     EditText handleText;
     EditText descriptionText;
-    ImageButton imageButton;
     Button logoutButton;
-
+    Button returnButton;
+    Button profileButton;
     private User currentUser;
+    Button usernameSubmit;
+    Button handleSubmit;
+    Button descriptionSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,6 @@ public class SettingsActivity extends AppCompatActivity {
         nameText = findViewById(R.id.edit_name);
         handleText = findViewById(R.id.edit_handle);
         descriptionText = findViewById(R.id.edit_description);
-        imageButton = findViewById(R.id.imageButton);
         logoutButton = findViewById(R.id.logout_button);
 
         new UserDao().get(firebaseUser.getUid(), user -> {
@@ -60,6 +63,14 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         logoutButton.setOnClickListener(view -> new AuthenticationServiceImpl().logout(getApplicationContext()));
+
+        // Return to timeline from settings menu
+        returnButton = findViewById(R.id.settings_return);
+        returnButton.setOnClickListener(view -> startActivity(new Intent(view.getContext(), TimelineActivity.class)));
+
+        // Go to your own profile from the settings menu
+        profileButton = findViewById(R.id.settings_profile);
+        profileButton.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ProfileActivity.class)));
     }
 
     protected FirebaseUser getLoggedInUser() {
@@ -76,12 +87,18 @@ public class SettingsActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.user_name:
                     nameText.setText(userName.getText());
+                    usernameSubmit = findViewById(R.id.edit_name_submit);
+                    usernameSubmit.setVisibility(View.VISIBLE); //Show the "GO" button
                     break;
                 case R.id.user_handle:
                     handleText.setText(userHandle.getText());
+                    handleSubmit = findViewById(R.id.edit_handle_submit);
+                    handleSubmit.setVisibility(View.VISIBLE);
                     break;
                 case R.id.user_description:
                     descriptionText.setText(userDescription.getText());
+                    descriptionSubmit = findViewById(R.id.edit_description_submit);
+                    descriptionSubmit.setVisibility(View.VISIBLE);
                     break;
             }
             switcher.showNext();
