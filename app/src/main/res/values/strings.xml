@@ -26,4 +26,5 @@
     <string name="_0">0</string>
     <string name="profile">Profile</string>
     <string name="display_name_missing">Display name missing</string>
+    <string name="posted_5_years_ago">Created an unknown time ago</string>
 </resources>
