@@ -4,7 +4,7 @@
     <string name="looking_for_something">Looking for something?</string>
     <string name="todo">TODO</string>
     <string name="placeholder_description">This is some placeholder text for the description of a post that the user gives when posting.</string>
-    <string name="what_s_happening">\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tWhat\'s happening?</string>
+    <string name="what_s_happening">\t\t\t\t\t\t\t\t\t\t\t\t\t\tWhat\'s happening?</string>
     <string name="submit">Submit</string>
     <string name="error_text_placeholder">ERROR TEXT PLACEHOLDER</string>
     <string name="please_sign_in">Please sign in.</string>
@@ -22,6 +22,8 @@
     <string name="create_your_username">Create your username.</string>
     <string name="handle">Create your handle.</string>
     <string name="click_here">Click Here</string>
-    <string name="home">Home</string>
+    <string name="home">Timeline</string>
     <string name="_0">0</string>
+    <string name="profile">Profile</string>
+    <string name="display_name_missing">Display name missing</string>
 </resources>

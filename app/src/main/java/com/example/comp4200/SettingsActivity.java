@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -44,9 +42,9 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         FirebaseUser firebaseUser = getLoggedInUser();
 
-        userName = findViewById(R.id.user_name);
-        userHandle = findViewById(R.id.user_handle);
-        userDescription = findViewById(R.id.user_description);
+        userName = findViewById(R.id.profile_username);
+        userHandle = findViewById(R.id.profile_handle);
+        userDescription = findViewById(R.id.profile_desc);
         nameText = findViewById(R.id.edit_name);
         handleText = findViewById(R.id.edit_handle);
         descriptionText = findViewById(R.id.edit_description);
@@ -85,17 +83,17 @@ public class SettingsActivity extends AppCompatActivity {
         if (parent instanceof ViewSwitcher) {
             ViewSwitcher switcher = (ViewSwitcher) parent;
             switch (view.getId()) {
-                case R.id.user_name:
+                case R.id.profile_username:
                     nameText.setText(userName.getText());
                     usernameSubmit = findViewById(R.id.edit_name_submit);
                     usernameSubmit.setVisibility(View.VISIBLE); //Show the "GO" button
                     break;
-                case R.id.user_handle:
+                case R.id.profile_handle:
                     handleText.setText(userHandle.getText());
                     handleSubmit = findViewById(R.id.edit_handle_submit);
                     handleSubmit.setVisibility(View.VISIBLE);
                     break;
-                case R.id.user_description:
+                case R.id.profile_desc:
                     descriptionText.setText(userDescription.getText());
                     descriptionSubmit = findViewById(R.id.edit_description_submit);
                     descriptionSubmit.setVisibility(View.VISIBLE);

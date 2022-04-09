@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E1E24"
-    android:onClick="sendTweet"
     android:textAlignment="textEnd">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -17,12 +16,14 @@
         android:layout_marginEnd="155dp"
         android:outlineAmbientShadowColor="#FFFFFF"
         android:outlineSpotShadowColor="#FFFFFF"
-        android:src="@drawable/placeholder_profile"
+        android:src="@drawable/icon_avatar"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck"
+        tools:visibility="gone" />
 
     <EditText
         android:id="@+id/compose_etextComposition"
