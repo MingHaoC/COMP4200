@@ -1,120 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#1E1E24"
     tools:context=".SettingsActivity">
 
-    <ImageButton
-        android:id="@+id/imageButton"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ViewSwitcher
-        android:id="@+id/name_switcher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:onClick="editTextView"
-            android:text="Set Name" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/edit_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:ems="10"
-                android:hint="Input display name"
-                android:inputType="textPersonName" />
-
-            <ImageButton
-                android:id="@+id/edit_name_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="submitEditUser" />
-        </LinearLayout>
-    </ViewSwitcher>
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="136dp"
+        android:text="Settings"
+        android:textColor="#FFF8F0"
+        android:textSize="38sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ViewSwitcher
         android:id="@+id/handle_switcher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_switcher">
 
         <TextView
             android:id="@+id/user_handle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Click to edit your handle."
             android:onClick="editTextView"
-            android:text="Set Handle" />
+            android:textAlignment="gravity"
+            android:textColor="#FFF8F0"
+            android:textColorHint="#709775"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/edit_handle"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Input handle"
-                android:inputType="textPersonName" />
+                android:backgroundTint="#726DA8"
+                android:hint="Your new handle..."
+                android:inputType="textPersonName"
+                android:textAlignment="gravity"
+                android:textColor="#FFF8F0"
+                android:textColorHint="#709775" />
 
-            <ImageButton
-                android:id="@+id/edit_handle_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="submitEditUser" />
         </LinearLayout>
     </ViewSwitcher>
 
     <ViewSwitcher
         android:id="@+id/description_switcher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/handle_switcher">
 
         <TextView
             android:id="@+id/user_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Click to edit your description."
             android:onClick="editTextView"
-            android:text="Set Description" />
+            android:textAlignment="gravity"
+            android:textColor="#FFF8F0"
+            android:textColorHint="#709775"
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/edit_description"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Input description"
-                android:inputType="textPersonName" />
+                android:backgroundTint="#726DA8"
+                android:hint="Your new description..."
+                android:inputType="textPersonName"
+                android:textAlignment="gravity"
+                android:textColor="#FFF8F0"
+                android:textColorHint="#709775" />
 
-            <ImageButton
-                android:id="@+id/edit_description_submit"
+        </LinearLayout>
+
+    </ViewSwitcher>
+
+    <ViewSwitcher
+        android:id="@+id/name_switcher"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Click to edit your username."
+            android:onClick="editTextView"
+            android:textAlignment="gravity"
+            android:textColor="#FFF8F0"
+            android:textColorHint="#709775"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edit_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="submitEditUser" />
+                android:layout_height="match_parent"
+                android:backgroundTint="#726DA8"
+                android:hint="Your new username..."
+                android:inputType="textPersonName"
+                android:textAlignment="center"
+                android:textColor="#FFF8F0"
+                android:textColorHint="#709775" />
+
         </LinearLayout>
     </ViewSwitcher>
 
     <Button
         android:id="@+id/logout_button"
+        android:layout_width="102dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#9E0031"
+        android:text="Log out"
+        app:layout_constraintEnd_toEndOf="@id/edit_description_submit"
+        app:layout_constraintTop_toBottomOf="@+id/description_switcher" />
+
+    <Button
+        android:id="@+id/settings_return"
+        android:layout_width="102dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#9E0031"
+        android:text="Return"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_switcher" />
+
+    <Button
+        android:id="@+id/edit_name_submit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout" />
-</LinearLayout>
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="#9E0031"
+        android:onClick="submitEditUser"
+        android:text="Go"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/name_switcher"
+        app:layout_constraintStart_toEndOf="@+id/name_switcher" />
+
+    <Button
+        android:id="@+id/edit_handle_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="#9E0031"
+        android:onClick="submitEditUser"
+        android:text="Go"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/handle_switcher"
+        app:layout_constraintStart_toEndOf="@+id/handle_switcher" />
+
+    <Button
+        android:id="@+id/edit_description_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="#9E0031"
+        android:onClick="submitEditUser"
+        android:text="Go"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/description_switcher"
+        app:layout_constraintStart_toEndOf="@+id/description_switcher" />
+
+    <Button
+        android:id="@+id/settings_profile"
+        android:layout_width="102dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="21dp"
+        android:backgroundTint="#9E0031"
+        android:text="Profile"
+        app:layout_constraintEnd_toStartOf="@+id/logout_button"
+        app:layout_constraintStart_toEndOf="@+id/settings_return"
+        app:layout_constraintTop_toBottomOf="@+id/description_switcher" />
+</androidx.constraintlayout.widget.ConstraintLayout>

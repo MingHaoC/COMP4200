@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.comp4200.model.Tweet;
@@ -64,5 +65,9 @@ public class TimelineActivity extends AppCompatActivity {
         // Add listener for the image to go to profile when click
         ImageView profileImage = findViewById(R.id.timeline_imageProfile);
         profileImage.setOnClickListener(view -> startActivity(new Intent(view.getContext(), ProfileActivity.class)));
+
+        // Go to settings menu from timeline
+        ImageButton settingsButton = findViewById(R.id.timeline_buttonSettings);
+        settingsButton.setOnClickListener(view -> startActivity(new Intent(view.getContext(), SettingsActivity.class)));
     }
 }
