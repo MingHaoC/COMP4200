@@ -1,6 +1,7 @@
 package com.example.comp4200;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Group;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,6 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
         postedTweetsButton = findViewById(R.id.profile_postedTweets);
         settingsButton = findViewById(R.id.profile_settings);
         user_forums = findViewById(R.id.user_forums);
+        Group profileGroup = findViewById(R.id.profileGroup); // for easily showing/hiding stuff
 
         String userId = getIntent().getStringExtra("user_id");
         if (userId == null || userId.isEmpty()) {
@@ -109,6 +111,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 user_forums.setVisibility(View.VISIBLE);
                 hideTweetsButton.setVisibility(View.VISIBLE);
+                profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
             }
         });
 
@@ -118,6 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 user_forums.setVisibility(View.VISIBLE);
                 hideTweetsButton.setVisibility(View.VISIBLE);
+                profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
             }
         });
 
@@ -127,6 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 user_forums.setVisibility(View.INVISIBLE);
                 hideTweetsButton.setVisibility(View.INVISIBLE);
+                profileGroup.setVisibility(View.VISIBLE); //shows the rest of the profile menu again
             }
         });
 

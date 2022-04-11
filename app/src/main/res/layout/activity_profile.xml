@@ -7,6 +7,12 @@
     android:background="#1E1E24"
     tools:context=".ProfileActivity">
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/profileGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="profile_username,profile_follow,profile_handle,profile_return,profile_settings,profile_desc,profile_likedTweets,profile_postedTweets,profile_joindate" />
+
     <Button
         android:id="@+id/profile_return"
         android:layout_width="108dp"
@@ -23,16 +29,16 @@
 
     <Button
         android:id="@+id/profile_settings"
-        android:layout_width="108dp"
+        android:layout_width="wrap_content"
         android:layout_height="58dp"
         android:layout_marginStart="151dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="152dp"
         android:backgroundTint="#9E0031"
+        android:stateListAnimator="@null"
         android:text="Settings"
         android:textSize="14sp"
         android:visibility="invisible"
-        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_likedTweets"
@@ -97,7 +103,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="81dp"
         android:text="@string/display_name_missing"
         android:textAlignment="center"

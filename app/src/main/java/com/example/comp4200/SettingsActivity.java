@@ -49,6 +49,9 @@ public class SettingsActivity extends AppCompatActivity {
         handleText = findViewById(R.id.edit_handle);
         descriptionText = findViewById(R.id.edit_description);
         logoutButton = findViewById(R.id.logout_button);
+        usernameSubmit = findViewById(R.id.edit_name_submit);
+        handleSubmit = findViewById(R.id.edit_handle_submit);
+        descriptionSubmit = findViewById(R.id.edit_description_submit);
 
         new UserDao().get(firebaseUser.getUid(), user -> {
             currentUser = user;
@@ -85,17 +88,14 @@ public class SettingsActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.profile_username:
                     nameText.setText(userName.getText());
-                    usernameSubmit = findViewById(R.id.edit_name_submit);
                     usernameSubmit.setVisibility(View.VISIBLE); //Show the "GO" button
                     break;
                 case R.id.profile_handle:
                     handleText.setText(userHandle.getText());
-                    handleSubmit = findViewById(R.id.edit_handle_submit);
                     handleSubmit.setVisibility(View.VISIBLE);
                     break;
                 case R.id.profile_desc:
                     descriptionText.setText(userDescription.getText());
-                    descriptionSubmit = findViewById(R.id.edit_description_submit);
                     descriptionSubmit.setVisibility(View.VISIBLE);
                     break;
             }
