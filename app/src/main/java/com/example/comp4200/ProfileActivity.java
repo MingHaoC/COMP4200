@@ -18,6 +18,8 @@ import com.example.comp4200.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Date;
+
 public class ProfileActivity extends AppCompatActivity {
     TextView name;
     TextView description;
@@ -48,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
         String userId = getIntent().getStringExtra("user_id");
         if (userId == null || userId.isEmpty()) {
             userId = currentUser != null ? currentUser.getUid() : "";
+            date_created.setText(new Date(currentUser.getMetadata().getCreationTimestamp()).toString());
         }
         String finalUserId = userId;
         new UserDao().get(userId, user -> {
@@ -70,8 +73,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
             getTweets(new View(getApplicationContext()));
         });
-//        date_created.setText(user.getCreatedDate().getMonth() + " " + user.getCreatedDate().getYear());
-//        imageView.setImageBitmap(bm); //TODO: Need to know how image is saved
+
+
 
         settingsButton.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
@@ -87,15 +90,11 @@ public class ProfileActivity extends AppCompatActivity {
 //        if (this.userId.equals(user.getId())){  //need current user
 //            followButton.setVisibility(View.INVISIBLE);
 //        }
-        followButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(following){
-                    unfollowUser();
-                }else{
-                    followUser();
-                }
-            }
+        followButton.setOnClickListener(view -> {
+            if(following)
+                unfollowUser();
+            else
+                followUser();
         });
 
         // Go to timeline from profile

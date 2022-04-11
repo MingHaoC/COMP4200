@@ -19,7 +19,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TimelineActivity extends AppCompatActivity {
 
@@ -35,11 +40,6 @@ public class TimelineActivity extends AppCompatActivity {
             return;
         }
 
-        // save the current logged in user info to the SharedPreferences
-        UserService userService = new UserServiceImpl();
-        SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        userService.getUser(firebaseUser.getUid(), editor);
         // Recycler view and adapter
         List<Tweet> tweets = new ArrayList<>();
         TweetRecyclerAdapter adapter = new TweetRecyclerAdapter(TimelineActivity.this, tweets);
@@ -47,15 +47,24 @@ public class TimelineActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(TimelineActivity.this));
         recyclerView.setAdapter(adapter);
 
-        // Get tweet for user
-        new TweetServiceImpl().getTweets(this, firebaseUser.getUid(), obj -> {
-            tweets.clear();
-            if (obj instanceof List<?>) {
-                for (Tweet tweet : (List<Tweet>) obj) {
-                    tweets.add(tweet);
+        // save the current logged in user info to the SharedPreferences
+        UserService userService = new UserServiceImpl();
+        SharedPreferences sp = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        userService.getUser(firebaseUser.getUid(), editor, obj -> {
+            // Get tweet for user
+            new TweetServiceImpl().getTweets(this, firebaseUser.getUid(), (Set<String>) obj, object -> {
+                tweets.clear();
+                if (object instanceof List<?>) {
+                    for (Tweet tweet : (List<Tweet>) object)
+                        tweets.add(tweet);
+
+                    Collections.sort(tweets);
+
+                    tweets.forEach(e-> System.out.println(new Date(e.getCreatedAt()).toString()));
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
-            }
+            });
         });
 
         // Post tweet button

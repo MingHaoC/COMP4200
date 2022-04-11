@@ -38,20 +38,21 @@
                 app:layout_constraintStart_toEndOf="@+id/imageButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <TextView
                 android:id="@+id/tvPostDesc"
-                android:layout_width="285dp"
-                android:layout_height="wrap_content"
+                android:layout_width="280dp"
+                android:layout_height="61dp"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="17dp"
                 android:maxWidth="280dp"
                 android:text="@string/placeholder_description"
                 android:textColor="#FFF8F0"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/tweet_ibLike"
                 app:layout_constraintTop_toBottomOf="@+id/tvPostUsername" />
-
 
             <ImageButton
                 android:id="@+id/tweet_ibLike"
@@ -117,8 +118,8 @@
                 android:id="@+id/tweet_datePosted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="17dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/posted_5_years_ago"
                 android:textColor="#989795"
                 android:textSize="12sp"

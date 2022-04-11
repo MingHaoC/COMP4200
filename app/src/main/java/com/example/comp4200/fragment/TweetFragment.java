@@ -16,6 +16,7 @@ import com.example.comp4200.model.Tweet;
 import com.example.comp4200.service.impl.TweetServiceImpl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class TweetFragment extends Fragment {
@@ -66,7 +67,7 @@ public class TweetFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         if (!userId.isEmpty()) {
-            new TweetServiceImpl().getTweets(getActivity(), userId, obj -> {
+            new TweetServiceImpl().getUserTweets(getActivity(), userId, obj -> {
                 tweets.clear();
                 if (obj instanceof List<?>) {
                     for (Tweet tweet : (List<Tweet>) obj) {
