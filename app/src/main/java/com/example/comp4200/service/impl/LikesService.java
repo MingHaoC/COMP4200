@@ -24,7 +24,7 @@ public class LikesService {
     }
 
     public void getLikes(String tweetId, FirebaseCallback callback) {
-        databaseReference.child(tweetId).addValueEventListener(new ValueEventListener() {
+        databaseReference.child(tweetId).orderByValue().equalTo(true).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Map<String, Boolean> likes = new HashMap<>();
