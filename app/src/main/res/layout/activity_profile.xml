@@ -16,6 +16,7 @@
         android:layout_marginEnd="152dp"
         android:backgroundTint="#9E0031"
         android:text="Return"
+        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_follow" />
@@ -31,6 +32,7 @@
         android:text="Settings"
         android:textSize="14sp"
         android:visibility="invisible"
+        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_likedTweets"
@@ -41,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="136dp"
         android:text="@string/profile"
         android:textColor="#FFF8F0"
@@ -60,6 +62,7 @@
         android:backgroundTint="#9E0031"
         android:text="Follow"
         android:visibility="invisible"
+        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_postedTweets"
@@ -73,6 +76,7 @@
         android:layout_marginEnd="80dp"
         android:backgroundTint="#9E0031"
         android:text="Liked Tweets"
+        android:stateListAnimator="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_desc" />
 
@@ -84,6 +88,7 @@
         android:layout_marginTop="40dp"
         android:backgroundTint="#9E0031"
         android:text="Posted Tweets"
+        android:stateListAnimator="@null"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_desc" />
 
@@ -92,7 +97,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="81dp"
         android:text="@string/display_name_missing"
         android:textAlignment="center"
@@ -159,6 +164,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_return" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_hideTweets">
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/profile_hideTweets"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="152dp"
+        android:backgroundTint="#9E0031"
+        android:text="Hide Tweets"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
