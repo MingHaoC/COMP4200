@@ -59,7 +59,6 @@ public class TweetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tweet, container, false);
-        tweets.add(new Tweet("CONTENT", "NAME"));
 
         adapter = new TweetRecyclerAdapter(getActivity(), tweets);
         recyclerView = view.findViewById(R.id.recyclerViewTweets);
