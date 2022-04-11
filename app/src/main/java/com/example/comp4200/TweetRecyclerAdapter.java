@@ -61,22 +61,19 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
         });
 
         //TODO: connect to DB and see if the current user has liked this tweet.
-        holder.likes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(liked){
-                    holder.likes.setImageResource(R.drawable.like);
-                    unlikeTweet();
-                    likeCount -= 1;
-                    holder.likeCounter.setText("" + likeCount);
-                }else{
-                    holder.likes.setImageResource(R.drawable.like_full);
-                    likeTweet();
-                    likeCount += 1;
-                    holder.likeCounter.setText("" + likeCount);
-                }
-
+        holder.likes.setOnClickListener(view -> {
+            if(liked){
+                holder.likes.setImageResource(R.drawable.like);
+                unlikeTweet();
+                likeCount -= 1;
+                holder.likeCounter.setText("" + likeCount);
+            }else{
+                holder.likes.setImageResource(R.drawable.like_full);
+                likeTweet();
+                likeCount += 1;
+                holder.likeCounter.setText("" + likeCount);
             }
+
         });
 
     }
@@ -109,7 +106,7 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
 
             likes = itemView.findViewById(R.id.tweet_ibLike);
             //replies = itemView.findViewById(R.id.tweet_ibComment);
-            profileImage = itemView.findViewById(R.id.tweet_profileImage);
+            profileImage = itemView.findViewById(R.id.imageButton);
 
             likeCounter = itemView.findViewById(R.id.tweet_likeCounter);
 
