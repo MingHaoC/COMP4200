@@ -1,30 +1,34 @@
 package com.example.comp4200.model;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Tweet implements Comparable{
+public class Tweet implements Comparable {
 
     private String tweetId;
     private String content;
     private String displayName;
     private Long createdAt;
     private String userID;
+    private Map<String, Boolean> likes;
 
-    public Tweet() {}
+    public Tweet() {
+    }
 
     public Tweet(String content, String displayName) {
         this.content = content;
         this.displayName = displayName;
     }
 
-    public Tweet(String userID, String displayName, Long createdAt, String content){
+    public Tweet(String userID, String displayName, Long createdAt, String content) {
         this.userID = userID;
         this.displayName = displayName;
         this.createdAt = createdAt;
         this.content = content;
     }
 
-    public Tweet(String userID, String displayName, Long createdAt, String content, String tweetId){
+    public Tweet(String userID, String displayName, Long createdAt, String content, String tweetId) {
         this.userID = userID;
         this.displayName = displayName;
         this.createdAt = createdAt;
@@ -71,6 +75,10 @@ public class Tweet implements Comparable{
     public void setUserId(String userId) {
         this.userID = userId;
     }
+
+    public Map<String, Boolean> getLikes() { return likes; }
+
+    public void setLikes(Map<String, Boolean> likes) { this.likes = likes; }
 
     @Override
     public int compareTo(Object tweet) {
