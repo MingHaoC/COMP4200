@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -68,15 +69,13 @@ public class ProfileActivity extends AppCompatActivity {
                 settingsButton.setVisibility(View.VISIBLE);
                 followButton.setVisibility(View.INVISIBLE);
                 // Go to the settings menu from your own profile
-            }
-            else //if the user is looking at someone else's profile
+            } else //if the user is looking at someone else's profile
             {
                 settingsButton.setVisibility(View.INVISIBLE);
                 followButton.setVisibility(View.VISIBLE);
             }
             getTweets(new View(getApplicationContext()));
         });
-
 
 
         settingsButton.setOnClickListener(view -> {
@@ -94,7 +93,7 @@ public class ProfileActivity extends AppCompatActivity {
 //            followButton.setVisibility(View.INVISIBLE);
 //        }
         followButton.setOnClickListener(view -> {
-            if(following)
+            if (following)
                 unfollowUser();
             else
                 followUser();
@@ -108,6 +107,7 @@ public class ProfileActivity extends AppCompatActivity {
         postedTweetsButton.setOnClickListener(new View.OnClickListener() {  //TODO: doesn't distinguish between liked/posted tweets yet
             @Override
             public void onClick(View view) {
+                getTweets(new View(getApplicationContext()));
                 user_forums.setVisibility(View.VISIBLE);
                 hideTweetsButton.setVisibility(View.VISIBLE);
                 profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
@@ -118,6 +118,7 @@ public class ProfileActivity extends AppCompatActivity {
         likedTweetsButton.setOnClickListener(new View.OnClickListener() { //TODO: doesn't distinguish between liked/posted tweets yet
             @Override
             public void onClick(View view) {
+                getLikedTweets(new View(getApplicationContext()));
                 user_forums.setVisibility(View.VISIBLE);
                 hideTweetsButton.setVisibility(View.VISIBLE);
                 profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
@@ -141,24 +142,32 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void getTweets(View view) {
-        TweetFragment tweetFragment = TweetFragment.newInstance(profileUser.getId());
+        TweetFragment tweetFragment = TweetFragment.newInstance(profileUser.getId(), false);
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.user_forums, tweetFragment);
         ft.commit();
     }
 
+    public void getLikedTweets(View view) {
+        TweetFragment likedTweetFragment = TweetFragment.newInstance(profileUser.getId(), true);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.user_forums, likedTweetFragment);
+        ft.commit();
+    }
+
     //TODO: connect to DB
     //functions to interact w DB
-    public void unfollowUser(){
+    public void unfollowUser() {
         followButton.setText("Follow");
-        Toast.makeText(this, "Unfollowed user @" + handle , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Unfollowed user @" + handle, Toast.LENGTH_SHORT).show();
         following = false;
     }
 
-    public void followUser(){
+    public void followUser() {
         followButton.setText("Unfollow");
-        Toast.makeText(this, "Followed user @" + handle , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Followed user @" + handle, Toast.LENGTH_SHORT).show();
         following = true;
     }
 

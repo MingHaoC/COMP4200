@@ -12,7 +12,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LikesService {
@@ -43,8 +45,26 @@ public class LikesService {
         });
     }
 
-    public void getLikedTweets(String uId) {
+    public void getLikedTweets(String uId, FirebaseCallback callback) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    List<String> userLiked = new ArrayList();
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if (((Map<String, Boolean>) ds.getValue()).containsKey(uId)) {
+                            userLiked.add(ds.getKey());
+                        }
+                    }
+                    callback.onCallback(userLiked);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("USER_LIKES_GET", "onCancelled: ", error.toException());
+            }
+        });
     }
 
     public void likeTweet(String tweetId, String uId) {
