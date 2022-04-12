@@ -29,7 +29,6 @@ public class SettingsActivity extends AppCompatActivity {
     EditText handleText;
     EditText descriptionText;
     Button logoutButton;
-    Button returnButton;
     Button profileButton;
     private User currentUser;
     Button usernameSubmit;
@@ -64,10 +63,6 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         logoutButton.setOnClickListener(view -> new AuthenticationServiceImpl().logout(getApplicationContext()));
-
-        // Return to timeline from settings menu
-        returnButton = findViewById(R.id.settings_return);
-        returnButton.setOnClickListener(view -> startActivity(new Intent(view.getContext(), TimelineActivity.class)));
 
         // Go to your own profile from the settings menu
         profileButton = findViewById(R.id.settings_profile);

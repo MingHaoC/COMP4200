@@ -42,12 +42,22 @@
 
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TimelineActivity" />
+        </activity>
+
+
 
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
-            android:parentActivityName=".ProfileActivity" />
+            android:parentActivityName=".TimelineActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".TimelineActivity" />
+        </activity>
 
         <activity
             android:name=".RegisterActivity"

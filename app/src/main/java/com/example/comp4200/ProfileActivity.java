@@ -98,10 +98,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         });
 
-        // Go to timeline from profile
-        returnButton = findViewById(R.id.profile_return);
-        returnButton.setOnClickListener(view -> startActivity(new Intent(view.getContext(), TimelineActivity.class)));
-
         postedTweetsButton = findViewById(R.id.profile_postedTweets);
         postedTweetsButton.setOnClickListener(new View.OnClickListener() {  //TODO: doesn't distinguish between liked/posted tweets yet
             @Override
