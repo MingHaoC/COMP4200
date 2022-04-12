@@ -1,8 +1,8 @@
 package com.example.comp4200.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
-public class Tweet {
+public class Tweet implements Comparable{
 
     private String tweetId;
     private String content;
@@ -64,11 +64,16 @@ public class Tweet {
         this.createdAt = createdAt;
     }
 
-    public String getUserID() {
+    public String getUserId() {
         return userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserId(String userId) {
+        this.userID = userId;
+    }
+
+    @Override
+    public int compareTo(Object tweet) {
+        return new Date(((Tweet) tweet).getCreatedAt()).compareTo(new Date(this.getCreatedAt()));
     }
 }

@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class TweetServiceImpl implements TweetService {
@@ -42,12 +43,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public void getTweets(Context context, FirebaseCallback callback) {
-        //TODO: Get tweets of most recent
-    }
-
-    @Override
-    public void getTweets(Context context, String id, FirebaseCallback callback) {
+    public void getUserTweets(Context context, String id, FirebaseCallback callback) {
         databaseReference.child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -58,6 +54,32 @@ public class TweetServiceImpl implements TweetService {
                     callback.onCallback(tweets);
                 } else
                     Toast.makeText(context, "Could not fetch the tweets", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("TWEET_GET_ID", "onCancelled: ", error.toException());
+            }
+        });
+    }
+
+    @Override
+    public void getTweets(Context context, String id, Set<String> followers, FirebaseCallback callback) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    List<Tweet> tweets = new ArrayList<>();
+                    for (DataSnapshot tweetSnapShot : snapshot.getChildren())
+                        if (followers.contains(tweetSnapShot.getKey()))
+                            for (DataSnapshot ds : tweetSnapShot.getChildren()) {
+                                Tweet tweet = ds.getValue(Tweet.class);
+                                if(tweet != null)
+                                    tweet.setTweetId(ds.getKey());
+                                tweets.add(tweet);
+                            }
+                    callback.onCallback(tweets);
+                }
             }
 
             @Override
