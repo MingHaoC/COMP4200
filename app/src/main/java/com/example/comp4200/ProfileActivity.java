@@ -88,7 +88,7 @@ public class ProfileActivity extends AppCompatActivity {
         //set the button to say Unfollow if they are following already
         //or follow if they are not following the user
         followers = getSharedPreferences("user", MODE_PRIVATE).getStringSet("followers", new HashSet<>());
-        if(followers.contains(userId))
+        if (followers.contains(userId))
             followButton.setText("Unfollow");
         followButton.setOnClickListener(view -> {
             if (followers.contains(userId))
@@ -102,23 +102,19 @@ public class ProfileActivity extends AppCompatActivity {
         returnButton.setOnClickListener(view -> startActivity(new Intent(view.getContext(), TimelineActivity.class)));
 
         postedTweetsButton = findViewById(R.id.profile_postedTweets);
-        postedTweetsButton.setOnClickListener(new View.OnClickListener() {  //TODO: doesn't distinguish between liked/posted tweets yet
-            @Override
-            public void onClick(View view) {
-                getTweets(new View(getApplicationContext()));
-                user_forums.setVisibility(View.VISIBLE);
-                hideTweetsButton.setVisibility(View.VISIBLE);
-                profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
-            }
+        postedTweetsButton.setOnClickListener(view -> {
+            getTweets(new View(getApplicationContext()));
+            user_forums.setVisibility(View.VISIBLE);
+            hideTweetsButton.setVisibility(View.VISIBLE);
+            profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
         });
 
         likedTweetsButton = findViewById(R.id.profile_likedTweets);
         likedTweetsButton.setOnClickListener(view -> {
             getLikedTweets(new View(getApplicationContext()));
             user_forums.setVisibility(View.VISIBLE);
-                hideTweetsButton.setVisibility(View.VISIBLE);
-                profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
-            }
+            hideTweetsButton.setVisibility(View.VISIBLE);
+            profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
         });
 
         hideTweetsButton = findViewById(R.id.profile_hideTweets);
@@ -167,7 +163,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void updateList(String id) {
         userService.getFollowers(id, getSharedPreferences("userFollower", MODE_PRIVATE).edit(), obj -> {
-            if(obj instanceof Set<?>)
+            if (obj instanceof Set<?>)
                 followers = (Set<String>) obj;
         });
     }
@@ -175,8 +171,8 @@ public class ProfileActivity extends AppCompatActivity {
     public void unfollowUser(String currentUserId, String removedUserId) {
 
         userService.removeFollower(currentUserId, removedUserId, success -> {
-            if(success instanceof Boolean) {
-                if((Boolean) success){
+            if (success instanceof Boolean) {
+                if ((Boolean) success) {
                     followButton.setText("follow");
                     Toast.makeText(this, "Unfollowed user @" + handle, Toast.LENGTH_SHORT).show();
                     updateList(currentUserId);
@@ -186,10 +182,11 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+
     public void followUser(String currentUserId, String addedUserId) {
         userService.addFollower(currentUserId, addedUserId, success -> {
-            if(success instanceof  Boolean) {
-                if((Boolean) success){
+            if (success instanceof Boolean) {
+                if ((Boolean) success) {
                     followButton.setText("Unfollow");
                     Toast.makeText(this, "Followed user @" + handle, Toast.LENGTH_SHORT).show();
                     updateList(currentUserId);
