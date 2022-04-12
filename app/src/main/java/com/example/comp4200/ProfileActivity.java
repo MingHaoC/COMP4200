@@ -2,12 +2,10 @@ package com.example.comp4200;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -36,9 +34,8 @@ public class ProfileActivity extends AppCompatActivity {
     Set<String> followers;
     UserService userService;
     Button settingsButton, followButton, likedTweetsButton, postedTweetsButton, returnButton, hideTweetsButton;
-    boolean following = false;
     View user_forums;
-  
+
     private User profileUser;
     private FirebaseUser currentUser;
 
@@ -75,16 +72,7 @@ public class ProfileActivity extends AppCompatActivity {
             handle.setText(profileUser.getHandle());
             // NOTE: This needs to be called to show the follow and settings buttons
             //If the user is looking at their own profile
-            if (currentUser.getUid().equals(finalUserId)) {
-                settingsButton.setVisibility(View.VISIBLE);
-                followButton.setVisibility(View.INVISIBLE);
-                date_created.setText(new Date(currentUser.getMetadata().getCreationTimestamp()).toString());
-                // Go to the settings menu from your own profile
-            } else {  //if the user is looking at someone else's profile
-                settingsButton.setVisibility(View.INVISIBLE);
-                followButton.setVisibility(View.VISIBLE);
-                date_created.setVisibility(TextView.INVISIBLE);
-            }
+            showButton(finalUserId);
 
             getTweets(new View(getApplicationContext()));
         });
@@ -95,12 +83,11 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //TODO: connect to DB
+
         //check if the user is already following the person
         //set the button to say Unfollow if they are following already
         //or follow if they are not following the user
         followers = getSharedPreferences("user", MODE_PRIVATE).getStringSet("followers", new HashSet<>());
-
         if(followers.contains(userId))
             followButton.setText("Unfollow");
         followButton.setOnClickListener(view -> {
@@ -126,29 +113,40 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         likedTweetsButton = findViewById(R.id.profile_likedTweets);
-        likedTweetsButton.setOnClickListener(new View.OnClickListener() { //TODO: doesn't distinguish between liked/posted tweets yet
-            @Override
-            public void onClick(View view) {
+        //TODO: doesn't distinguish between liked/posted tweets yet
+        likedTweetsButton.setOnClickListener(view -> {
                 user_forums.setVisibility(View.VISIBLE);
                 hideTweetsButton.setVisibility(View.VISIBLE);
                 profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
-            }
+
         });
 
         hideTweetsButton = findViewById(R.id.profile_hideTweets);
-        hideTweetsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                user_forums.setVisibility(View.INVISIBLE);
-                hideTweetsButton.setVisibility(View.INVISIBLE);
-                profileGroup.setVisibility(View.VISIBLE); //shows the rest of the profile menu again
-            }
+        hideTweetsButton.setOnClickListener(view -> {
+            user_forums.setVisibility(View.INVISIBLE);
+            hideTweetsButton.setVisibility(View.INVISIBLE);
+            profileGroup.setVisibility(View.VISIBLE); //shows the rest of the profile menu again
+            showButton(finalUserId);
         });
 
         // When the profile is opened, hide the tweets until the user wants to see them
         hideTweetsButton.setVisibility(View.INVISIBLE);
         user_forums.setVisibility(View.INVISIBLE);
 
+    }
+
+
+    public void showButton(String finalUserId) {
+        if (currentUser.getUid().equals(finalUserId)) {
+            settingsButton.setVisibility(View.VISIBLE);
+            followButton.setVisibility(View.INVISIBLE);
+            date_created.setText(new Date(currentUser.getMetadata().getCreationTimestamp()).toString());
+            // Go to the settings menu from your own profile
+        } else {  //if the user is looking at someone else's profile
+            settingsButton.setVisibility(View.INVISIBLE);
+            followButton.setVisibility(View.VISIBLE);
+            date_created.setVisibility(TextView.INVISIBLE);
+        }
     }
 
     public void getTweets(View view) {
