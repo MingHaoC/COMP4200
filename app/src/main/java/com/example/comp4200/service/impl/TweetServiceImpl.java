@@ -19,6 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -49,9 +50,15 @@ public class TweetServiceImpl implements TweetService {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     List<Tweet> tweets = new ArrayList<>();
-                    for (DataSnapshot ds : snapshot.getChildren())
-                        tweets.add(ds.getValue(Tweet.class));
-                    callback.onCallback(tweets);
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        Tweet tweet = ds.getValue(Tweet.class);
+                        new LikesService().getLikes(ds.getKey(), obj -> {
+                            tweet.setLikes((Map<String, Boolean>) obj);
+                            tweet.setTweetId(ds.getKey());
+                            tweets.add(tweet);
+                            callback.onCallback(tweets);
+                        });
+                    }
                 } else
                     Toast.makeText(context, "Could not fetch the tweets", Toast.LENGTH_LONG).show();
             }
@@ -74,17 +81,70 @@ public class TweetServiceImpl implements TweetService {
                         if (followers.contains(tweetSnapShot.getKey()))
                             for (DataSnapshot ds : tweetSnapShot.getChildren()) {
                                 Tweet tweet = ds.getValue(Tweet.class);
-                                if(tweet != null)
-                                    tweet.setTweetId(ds.getKey());
-                                tweets.add(tweet);
+
+                                if (tweet != null) {
+                                    new LikesService().getLikes(ds.getKey(), obj -> {
+                                        tweet.setLikes((Map<String, Boolean>) obj);
+                                        tweet.setTweetId(ds.getKey());
+                                        if (tweets.contains(tweet)) {
+                                            for (int i = 0; i < tweets.size(); i++) {
+                                                if (tweets.get(i).compareTo(tweet) == 0) {
+                                                    tweets.set(i, tweet);
+                                                }
+                                            }
+                                        } else {
+                                            tweets.add(tweet);
+                                        }
+                                        callback.onCallback(tweets);
+                                    });
+                                }
                             }
-                    callback.onCallback(tweets);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.w("TWEET_GET_ID", "onCancelled: ", error.toException());
+            }
+        });
+    }
+
+    public void getLikedTweets(Context context, String id, FirebaseCallback callback) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    List<Tweet> tweets = new ArrayList<>();
+                    for (DataSnapshot tweetSnapShot : snapshot.getChildren())
+                        new LikesService().getLikedTweets(id, (FirebaseCallback) object -> {
+                            for (DataSnapshot ds : tweetSnapShot.getChildren()) {
+                                if (((List<String>) object).contains(ds.getKey())) {
+                                    Tweet tweet = ds.getValue(Tweet.class);
+                                    if (tweet != null) {
+                                        new LikesService().getLikes(ds.getKey(), obj -> {
+                                            tweet.setLikes((Map<String, Boolean>) obj);
+                                            tweet.setTweetId(ds.getKey());
+                                            if (tweets.contains(tweet)) {
+                                                for (int i = 0; i < tweets.size(); i++) {
+                                                    if (tweets.get(i).compareTo(tweet) == 0) {
+                                                        tweets.set(i, tweet);
+                                                    }
+                                                }
+                                            } else {
+                                                tweets.add(tweet);
+                                            }
+                                            callback.onCallback(tweets);
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

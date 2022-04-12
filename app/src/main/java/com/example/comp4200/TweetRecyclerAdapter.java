@@ -2,6 +2,7 @@ package com.example.comp4200;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comp4200.model.Tweet;
+import com.example.comp4200.service.impl.LikesService;
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +26,7 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
     Context context;
     List<Tweet> tweets;
     boolean liked = false;
-    int likeCount;
+    int likeCount = 0;
 
 
     public TweetRecyclerAdapter(Context context, List<Tweet> tweets) {
@@ -45,19 +47,23 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
 
         //TODO: connect to db and set likeCount
         // setting likeCount to 0 for now.
-        //int likes = something;
-        likeCount = 0;
+        Tweet tweet = tweets.get(position);
+        String userId = context.getSharedPreferences("user", Context.MODE_PRIVATE).getString("id", "");
+        String tweetContent = tweet.getContent();
+        String username = "" + tweet.getDisplayName();
+        likeCount = tweet.getLikes().size();
+        if (tweet.getLikes().containsKey(userId) && tweet.getLikes().get(userId)) {
+            holder.likes.setImageResource(R.drawable.like_full);
+        }
 
-        String tweetContent = tweets.get(position).getContent();
-        String username = "" + tweets.get(position).getDisplayName();
-
-        if (tweets.get(position).getCreatedAt() != null) {
-            Date date = new Date(tweets.get(position).getCreatedAt());
+        if (tweet.getCreatedAt() != null) {
+            Date date = new Date(tweet.getCreatedAt());
             holder.datePosted.setText(date.toString());
         }
 
         holder.tweetContent.setText(tweetContent);
         holder.tweetUser.setText(username);
+        holder.likeCounter.setText("" + likeCount);
 
         holder.profileImage.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), ProfileActivity.class);
@@ -65,20 +71,14 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
             view.getContext().startActivity(intent);
         });
 
-        //TODO: connect to DB and see if the current user has liked this tweet.
         holder.likes.setOnClickListener(view -> {
-            if (liked) {
+            if (tweet.getLikes().containsKey(userId)) {
                 holder.likes.setImageResource(R.drawable.like);
-                unlikeTweet();
-                likeCount -= 1;
-                holder.likeCounter.setText("" + likeCount);
+                unlikeTweet(tweet.getTweetId(), userId);
             } else {
                 holder.likes.setImageResource(R.drawable.like_full);
-                likeTweet();
-                likeCount += 1;
-                holder.likeCounter.setText("" + likeCount);
+                likeTweet(tweet.getTweetId(), userId);
             }
-
         });
 
     }
@@ -94,12 +94,8 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
         TextView tweetContent;
         TextView likeCounter;
         TextView datePosted;
-
         CardView cardView;
-
         ImageButton likes;
-        ImageButton replies;
-
         ImageView profileImage;
 
         public ItemViewHolder(@NonNull View itemView) {
@@ -108,13 +104,9 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
             tweetUser = itemView.findViewById(R.id.tvPostUsername);
             tweetContent = itemView.findViewById(R.id.tvPostDesc);
             datePosted = itemView.findViewById(R.id.tweet_datePosted);
-
             cardView = itemView.findViewById(R.id.task);
-
             likes = itemView.findViewById(R.id.tweet_ibLike);
-            //replies = itemView.findViewById(R.id.tweet_ibComment);
             profileImage = itemView.findViewById(R.id.imageButton);
-
             likeCounter = itemView.findViewById(R.id.tweet_likeCounter);
 
         }
@@ -123,12 +115,14 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
 
     //TODO: connect to DB
     //functions to interact with DB
-    public void likeTweet() {
+    public void likeTweet(String tweetId, String uId) {
+        new LikesService().likeTweet(tweetId, uId);
         Toast.makeText(this.context, "Liked tweet!", Toast.LENGTH_SHORT).show();
         liked = true;
     }
 
-    public void unlikeTweet() {
+    public void unlikeTweet(String tweetId, String uId) {
+        new LikesService().unlikeTweet(tweetId, uId);
         Toast.makeText(this.context, "Unliked tweet!", Toast.LENGTH_SHORT).show();
         liked = false;
     }
