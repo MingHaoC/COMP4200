@@ -65,7 +65,11 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
         holder.tweetUser.setText(username);
         holder.likeCounter.setText("" + likeCount);
 
-        holder.profileImage.setOnClickListener(view -> view.getContext().startActivity(new Intent(view.getContext(), ProfileActivity.class)));
+        holder.profileImage.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), ProfileActivity.class);
+            intent.putExtra("user_id", tweets.get(position).getUserId());
+            view.getContext().startActivity(intent);
+        });
 
         holder.likes.setOnClickListener(view -> {
             if (tweet.getLikes().containsKey(userId)) {
