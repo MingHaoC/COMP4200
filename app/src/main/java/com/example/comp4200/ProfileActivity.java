@@ -1,6 +1,7 @@
 package com.example.comp4200;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.Group;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,9 +24,9 @@ public class ProfileActivity extends AppCompatActivity {
     TextView description;
     TextView handle;
     TextView date_created;
-    Button settingsButton, followButton, likedTweetsButton, postedTweetsButton, returnButton;
+    Button settingsButton, followButton, likedTweetsButton, postedTweetsButton, returnButton, hideTweetsButton;
     boolean following = false;
-
+    View user_forums;
     private User profileUser;
     private FirebaseUser currentUser;
 
@@ -44,6 +45,8 @@ public class ProfileActivity extends AppCompatActivity {
         likedTweetsButton = findViewById(R.id.profile_likedTweets);
         postedTweetsButton = findViewById(R.id.profile_postedTweets);
         settingsButton = findViewById(R.id.profile_settings);
+        user_forums = findViewById(R.id.user_forums);
+        Group profileGroup = findViewById(R.id.profileGroup); // for easily showing/hiding stuff
 
         String userId = getIntent().getStringExtra("user_id");
         if (userId == null || userId.isEmpty()) {
@@ -101,6 +104,41 @@ public class ProfileActivity extends AppCompatActivity {
         // Go to timeline from profile
         returnButton = findViewById(R.id.profile_return);
         returnButton.setOnClickListener(view -> startActivity(new Intent(view.getContext(), TimelineActivity.class)));
+
+        postedTweetsButton = findViewById(R.id.profile_postedTweets);
+        postedTweetsButton.setOnClickListener(new View.OnClickListener() {  //TODO: doesn't distinguish between liked/posted tweets yet
+            @Override
+            public void onClick(View view) {
+                user_forums.setVisibility(View.VISIBLE);
+                hideTweetsButton.setVisibility(View.VISIBLE);
+                profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
+            }
+        });
+
+        likedTweetsButton = findViewById(R.id.profile_likedTweets);
+        likedTweetsButton.setOnClickListener(new View.OnClickListener() { //TODO: doesn't distinguish between liked/posted tweets yet
+            @Override
+            public void onClick(View view) {
+                user_forums.setVisibility(View.VISIBLE);
+                hideTweetsButton.setVisibility(View.VISIBLE);
+                profileGroup.setVisibility(View.INVISIBLE); //hides the rest of the profile menu
+            }
+        });
+
+        hideTweetsButton = findViewById(R.id.profile_hideTweets);
+        hideTweetsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                user_forums.setVisibility(View.INVISIBLE);
+                hideTweetsButton.setVisibility(View.INVISIBLE);
+                profileGroup.setVisibility(View.VISIBLE); //shows the rest of the profile menu again
+            }
+        });
+
+        // When the profile is opened, hide the tweets until the user wants to see them
+        hideTweetsButton.setVisibility(View.INVISIBLE);
+        user_forums.setVisibility(View.INVISIBLE);
+
     }
 
     public void getTweets(View view) {

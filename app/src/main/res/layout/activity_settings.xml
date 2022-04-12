@@ -167,7 +167,7 @@
         android:layout_marginStart="10dp"
         android:backgroundTint="#9E0031"
         android:onClick="submitEditUser"
-        android:text="Go"
+        android:text="@string/submit"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/name_switcher"
         app:layout_constraintStart_toEndOf="@+id/name_switcher" />
@@ -179,7 +179,7 @@
         android:layout_marginStart="10dp"
         android:backgroundTint="#9E0031"
         android:onClick="submitEditUser"
-        android:text="Go"
+        android:text="@string/submit"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/handle_switcher"
         app:layout_constraintStart_toEndOf="@+id/handle_switcher" />
@@ -191,7 +191,7 @@
         android:layout_marginStart="10dp"
         android:backgroundTint="#9E0031"
         android:onClick="submitEditUser"
-        android:text="Go"
+        android:text="@string/submit"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/description_switcher"
         app:layout_constraintStart_toEndOf="@+id/description_switcher" />
