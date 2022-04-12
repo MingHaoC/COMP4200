@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +16,14 @@ import android.widget.Toast;
 import com.example.comp4200.DAO.UserDao;
 import com.example.comp4200.fragment.TweetFragment;
 import com.example.comp4200.model.User;
+import com.example.comp4200.service.UserService;
+import com.example.comp4200.service.impl.UserServiceImpl;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ProfileActivity extends AppCompatActivity {
     TextView name;
@@ -26,7 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
     TextView handle;
     TextView date_created;
     Button settingsButton, followButton, likedTweetsButton, postedTweetsButton, returnButton;
-    boolean following = false;
+    String userId;
+    Set<String> followers;
+    UserService userService;
 
     private User profileUser;
     private FirebaseUser currentUser;
@@ -38,6 +45,8 @@ public class ProfileActivity extends AppCompatActivity {
         getLoggedInUser();
         setViews();
 
+        userService = new UserServiceImpl();
+
         name = findViewById(R.id.profile_username);
         description = findViewById(R.id.profile_desc);
         handle = findViewById(R.id.profile_handle);
@@ -47,11 +56,10 @@ public class ProfileActivity extends AppCompatActivity {
         postedTweetsButton = findViewById(R.id.profile_postedTweets);
         settingsButton = findViewById(R.id.profile_settings);
 
-        String userId = getIntent().getStringExtra("user_id");
-        if (userId == null || userId.isEmpty()) {
+        userId = getIntent().getStringExtra("user_id");
+        if (userId == null || userId.isEmpty())
             userId = currentUser != null ? currentUser.getUid() : "";
-            date_created.setText(new Date(currentUser.getMetadata().getCreationTimestamp()).toString());
-        }
+
         String finalUserId = userId;
         new UserDao().get(userId, user -> {
             profileUser = user;
@@ -59,21 +67,21 @@ public class ProfileActivity extends AppCompatActivity {
             name.setText(profileUser.getDisplayName());
             description.setText(profileUser.getDescription());
             handle.setText(profileUser.getHandle());
-
             // NOTE: This needs to be called to show the follow and settings buttons
-            if (currentUser.getUid().equals(finalUserId)) { //If the user is looking at their own profile
+            //If the user is looking at their own profile
+            if (currentUser.getUid().equals(finalUserId)) {
                 settingsButton.setVisibility(View.VISIBLE);
                 followButton.setVisibility(View.INVISIBLE);
+                date_created.setText(new Date(currentUser.getMetadata().getCreationTimestamp()).toString());
                 // Go to the settings menu from your own profile
-            }
-            else //if the user is looking at someone else's profile
-            {
+            } else {  //if the user is looking at someone else's profile
                 settingsButton.setVisibility(View.INVISIBLE);
                 followButton.setVisibility(View.VISIBLE);
+                date_created.setVisibility(TextView.INVISIBLE);
             }
+
             getTweets(new View(getApplicationContext()));
         });
-
 
 
         settingsButton.setOnClickListener(view -> {
@@ -85,16 +93,16 @@ public class ProfileActivity extends AppCompatActivity {
         //check if the user is already following the person
         //set the button to say Unfollow if they are following already
         //or follow if they are not following the user
+        followers = getSharedPreferences("user", MODE_PRIVATE).getStringSet("followers", new HashSet<>());
 
-        //this if-statement doesn't work until we populate user object with actual data
-//        if (this.userId.equals(user.getId())){  //need current user
-//            followButton.setVisibility(View.INVISIBLE);
-//        }
+        if(followers.contains(userId))
+            followButton.setText("Unfollow");
         followButton.setOnClickListener(view -> {
-            if(following)
-                unfollowUser();
+            if (followers.contains(userId))
+                unfollowUser(currentUser.getUid(), userId);
             else
-                followUser();
+                followUser(currentUser.getUid(), userId);
+
         });
 
         // Go to timeline from profile
@@ -110,18 +118,38 @@ public class ProfileActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    //TODO: connect to DB
-    //functions to interact w DB
-    public void unfollowUser(){
-        followButton.setText("Follow");
-        Toast.makeText(this, "Unfollowed user @" + handle , Toast.LENGTH_SHORT).show();
-        following = false;
+    private void updateList(String id) {
+        userService.getFollowers(id, getSharedPreferences("userFollower", MODE_PRIVATE).edit(), obj -> {
+            if(obj instanceof Set<?>)
+                followers = (Set<String>) obj;
+        });
     }
 
-    public void followUser(){
-        followButton.setText("Unfollow");
-        Toast.makeText(this, "Followed user @" + handle , Toast.LENGTH_SHORT).show();
-        following = true;
+    public void unfollowUser(String currentUserId, String removedUserId) {
+
+        userService.removeFollower(currentUserId, removedUserId, success -> {
+            if(success instanceof Boolean) {
+                if((Boolean) success){
+                    followButton.setText("follow");
+                    Toast.makeText(this, "Unfollowed user @" + handle, Toast.LENGTH_SHORT).show();
+                    updateList(currentUserId);
+                } else
+                    Toast.makeText(this, "An error has occurred trying to unfollow the user, please try again later", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void followUser(String currentUserId, String addedUserId) {
+        userService.addFollower(currentUserId, addedUserId, success -> {
+            if(success instanceof  Boolean) {
+                if((Boolean) success){
+                    followButton.setText("Unfollow");
+                    Toast.makeText(this, "Followed user @" + handle, Toast.LENGTH_SHORT).show();
+                    updateList(currentUserId);
+                } else
+                    Toast.makeText(this, "An error has occurred trying to follow the user, please try again later", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     protected void getLoggedInUser() {

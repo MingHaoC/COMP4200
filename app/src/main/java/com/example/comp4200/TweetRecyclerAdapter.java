@@ -59,7 +59,11 @@ public class TweetRecyclerAdapter extends RecyclerView.Adapter<TweetRecyclerAdap
         holder.tweetContent.setText(tweetContent);
         holder.tweetUser.setText(username);
 
-        holder.profileImage.setOnClickListener(view -> view.getContext().startActivity(new Intent(view.getContext(), ProfileActivity.class)));
+        holder.profileImage.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), ProfileActivity.class);
+            intent.putExtra("user_id", tweets.get(position).getUserId());
+            view.getContext().startActivity(intent);
+        });
 
         //TODO: connect to DB and see if the current user has liked this tweet.
         holder.likes.setOnClickListener(view -> {

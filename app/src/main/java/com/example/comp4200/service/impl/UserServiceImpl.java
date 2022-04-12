@@ -43,6 +43,12 @@ public class UserServiceImpl implements UserService {
             }
         });
 
+        getFollowers(id, editor, firebaseCallback);
+    }
+
+    @Override
+    public void getFollowers(String id, SharedPreferences.Editor editor, FirebaseCallback firebaseCallback) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
         databaseReference = db.getReference("UserFollows");
         databaseReference.child(id).get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -52,9 +58,34 @@ public class UserServiceImpl implements UserService {
                 if (map != null) {
                     map.forEach((key, value) -> followers.add(key));
                     editor.putStringSet("followers", followers);
+                    editor.commit();
                 }
                 firebaseCallback.onCallback(followers);
             }
+        });
+    }
+
+    @Override
+    public void addFollower(String currentUserId, String addedUserId, FirebaseCallback callback) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        databaseReference = db.getReference("UserFollows");
+        databaseReference.child(currentUserId).child(addedUserId).setValue(true).addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+                callback.onCallback(true);
+            else
+                callback.onCallback(false);
+        });
+    }
+
+    @Override
+    public void removeFollower(String currentUserId, String removedUserId, FirebaseCallback callback) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        databaseReference = db.getReference("UserFollows");
+        databaseReference.child(currentUserId).child(removedUserId).setValue(null).addOnCompleteListener(task -> {
+            if(task.isSuccessful())
+                callback.onCallback(true);
+            else
+                callback.onCallback(false);
         });
     }
 
