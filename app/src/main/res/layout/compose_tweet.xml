@@ -35,6 +35,7 @@
         android:background="@android:color/transparent"
         android:ems="10"
         android:fontFamily="sans-serif"
+        android:gravity="top|left"
         android:hint="@string/what_s_happening"
         android:importantForAutofill="no"
         android:inputType="textMultiLine"
